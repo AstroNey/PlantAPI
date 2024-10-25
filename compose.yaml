@@ -2,10 +2,11 @@ version: '3'
 
 services:
   postgres:
+    container_name: "postgree"
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_DB=plantAPI'
       - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_USER=secret'
     ports:
-      - '5432'
+      - '5432:5432'
