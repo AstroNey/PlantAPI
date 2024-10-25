@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+/**
+ * User that define user account on site.
+ */
 @Entity
 public class User {
 
