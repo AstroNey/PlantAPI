@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn -B clean install
+        run: mvn -B clean install -Djacoco.skip=true
 
       - name: jacoco-reporter
         uses: PavanMudigonda/jacoco-reporter@v5.0
