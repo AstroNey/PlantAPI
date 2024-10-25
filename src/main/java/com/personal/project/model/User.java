@@ -10,15 +10,30 @@ import jakarta.persistence.Id;
 @Entity
 public class User {
 
+    /**
+     * Unique id, generated BD sde.
+     */
     @Id
     @GeneratedValue
     private Long id;
 
-    private String FirstName;
+    /**
+     * FirstName of user.
+     */
+    private String firstName;
 
-    private String LastName;
+    /**
+     * LastName of user.
+     */
+    private String lastName;
 
-    private String Email;
+    /**
+     * Email of user.
+     */
+    private String email;
 
-    private String Phone;
+    /**
+     * Phone number of user.
+     */
+    private String phoneNumber;
 }
