@@ -20,10 +20,13 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Build with Maven
+        run: mvn -B clean install
+
       - name: jacoco-reporter
         uses: PavanMudigonda/jacoco-reporter@v5.0
         with:
-          coverage_results_path: ./target/site/jacoco/jacoco.xml
+          coverage_results_path: target/site/jacoco/jacoco.xml
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_check_run: false
           coverage_report_name: Coverage
@@ -31,9 +34,6 @@ jobs:
           minimum_coverage: 70
           fail_below_threshold: false
           publish_only_summary: true
-
-      - name: Build with Maven
-        run: mvn -B clean install
 
       - name: Run Checkstyle
         run: mvn checkstyle:checkstyle
