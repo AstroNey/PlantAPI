@@ -2,6 +2,8 @@ package com.personal.project.model;
 
 public class User {
 
-    private String Name;
+    private String FirstName;
+
+    private String LastName;
 
 }
