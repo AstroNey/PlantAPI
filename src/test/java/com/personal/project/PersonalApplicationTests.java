@@ -8,6 +8,6 @@ class PersonalApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// document why this method is empty
 	}
-
 }
