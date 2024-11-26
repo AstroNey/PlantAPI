@@ -25,6 +25,7 @@ jobs:
 
       - name: Start Docker
         run: docker-compose -f "compose.yaml" up -d --build
+        working-directory: ./
 
       - name: Build with Maven
         run: mvn -B clean install
