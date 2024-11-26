@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Start Docker
-        run: ls -l
+        run: docker-compose -f compose.yaml build
 
       - name: Build with Maven
         run: mvn -B clean install
