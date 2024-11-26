@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Booting class.
  */
 @SpringBootApplication
+@SuppressWarnings("HideUtilityClassConstructor")
 public class PersonalApplication {
 
     /**
