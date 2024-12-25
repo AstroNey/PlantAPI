@@ -2,8 +2,10 @@ package com.personal.project.services;
 
 import com.personal.project.model.Plant;
 import com.personal.project.repository.PlantRepository;
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,4 +35,10 @@ public class PlantService {
     public Optional<Plant> findPlantById(final Long id) {
         return plantRepository.findById(id);
     }
+
+    /**
+     * Get all plants without limits.
+     * @return all plants.
+     */
+    public Iterable<Plant> findPlants() { return plantRepository.findAll(); }
 }
