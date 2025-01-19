@@ -2,10 +2,9 @@ package com.personal.project.services;
 
 import com.personal.project.model.Plant;
 import com.personal.project.repository.PlantRepository;
-import io.micrometer.observation.ObservationFilter;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -41,4 +40,12 @@ public class PlantService {
      * @return all plants.
      */
     public Iterable<Plant> findPlants() { return plantRepository.findAll(); }
+
+    /**
+     * Get all plants with limit.
+     * @return the number of plant define by limit.
+     */
+    public Page<Plant> findPlantsWithLimit(org.springframework.data.domain.Pageable pageable) {
+        return plantRepository.findAll(pageable);
+    }
 }

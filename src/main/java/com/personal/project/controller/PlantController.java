@@ -3,11 +3,11 @@ package com.personal.project.controller;
 
 import com.personal.project.model.Plant;
 import com.personal.project.services.PlantService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +51,9 @@ public class PlantController {
      * @return Get all plants
      */
     @GetMapping("/plants")
-    public ResponseEntity<List<Plant>> getPlants() {
-        Iterable<Plant> iterablePlants = plantService.findPlants();
-        List<Plant> plants = new ArrayList<>();
-        iterablePlants.forEach(plants::add);
-        return !plants.isEmpty() ?  ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
+    public ResponseEntity<Page<Plant>> getPlantsWithLimits(@RequestParam int size) {
+        Pageable pageable = PageRequest.of(0, size);
+        Page<Plant> plants = plantService.findPlantsWithLimit(pageable);
+        return plants.hasContent() ?  ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
     }
 }
