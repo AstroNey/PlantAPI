@@ -4,6 +4,7 @@ import com.personal.project.model.Plant;
 import com.personal.project.repository.PlantRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -39,13 +40,16 @@ public class PlantService {
      * Get all plants without limits.
      * @return all plants.
      */
-    public Iterable<Plant> findPlants() { return plantRepository.findAll(); }
+    public Iterable<Plant> findPlants() {
+        return plantRepository.findAll();
+    }
 
     /**
      * Get all plants with limit.
+     * @param pageable the page created with the plants.
      * @return the number of plant define by limit.
      */
-    public Page<Plant> findPlantsWithLimit(org.springframework.data.domain.Pageable pageable) {
+    public Page<Plant> findPlantsWithLimit(final Pageable pageable) {
         return plantRepository.findAll(pageable);
     }
 }

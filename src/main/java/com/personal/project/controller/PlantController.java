@@ -7,10 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Plant controller.
@@ -48,12 +50,15 @@ public class PlantController {
 
     /**
      * Get all plants if data exist.
-     * @return Get all plants
+     * @param size the number of elements we want in the page.
+     * @return Get all plants with limit.
      */
     @GetMapping("/plants")
-    public ResponseEntity<Page<Plant>> getPlantsWithLimits(@RequestParam int size) {
+    ResponseEntity<Page<Plant>> getPlantsWithLimits(
+            @RequestParam final int size) {
         Pageable pageable = PageRequest.of(0, size);
         Page<Plant> plants = plantService.findPlantsWithLimit(pageable);
-        return plants.hasContent() ?  ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
+        return plants.hasContent()
+                ? ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
     }
 }

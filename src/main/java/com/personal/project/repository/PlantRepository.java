@@ -12,5 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlantRepository extends JpaRepository<Plant, Long> {
 
+    /**
+     * Find all plant to use for limited request.
+     * @param pageable the pageable to request a paged result.
+     * @return the page with contents.
+     */
     Page<Plant> findAll(Pageable pageable);
 }
