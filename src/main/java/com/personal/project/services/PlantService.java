@@ -37,14 +37,6 @@ public class PlantService {
     }
 
     /**
-     * Get all plants without limits.
-     * @return all plants.
-     */
-    public Iterable<Plant> findPlants() {
-        return plantRepository.findAll();
-    }
-
-    /**
      * Get all plants with limit.
      * @param pageable the page created with the plants.
      * @return the number of plant define by limit.

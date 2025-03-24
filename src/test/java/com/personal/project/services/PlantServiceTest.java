@@ -25,7 +25,22 @@ class PlantServiceTest {
 
     @Test
     void findPlantByIdSucces() {
-        Plant expectedPlant = new Plant(1L, "Monstera", "Monstera deliciosa", "");
+        Plant expectedPlant = new Plant.Builder()
+                .setId(1L)
+                .setScientificName("ScientificName")
+                .setName("Name")
+                .setDescription("Description")
+                .setFoliage("Foliage")
+                .setFlowers("Flowers")
+                .setSize(0.6)
+                .setSunlight("Sunlight")
+                .setWatering("Watering")
+                .setSoil("Soil")
+                .setTemperature("Temp")
+                .setCare("Care")
+                .setToxicity("Toxicity")
+                .setImage("Image")
+                .build();
         when(plantRepository.findById(1L)).thenReturn(Optional.of(expectedPlant));
 
         Optional<Plant> actualPlant = plantService.findPlantById(1L);
