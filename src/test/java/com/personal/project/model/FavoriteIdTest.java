@@ -24,7 +24,7 @@ class FavoriteIdTest {
     }
 
     @Test
-    public void testInvalidFavoriteId() {
+    void testInvalidFavoriteId() {
         // Attempt to create FavoriteId with null values
         FavoriteId favoriteInvalidId = new FavoriteId(null, null);
 
@@ -34,11 +34,11 @@ class FavoriteIdTest {
 
         // You can also check if the equals method behaves correctly with null values
         FavoriteId anotherFavoriteId = new FavoriteId(null, null);
-        assertEquals(anotherFavoriteId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
+        assertEquals(favoriteId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         FavoriteId favoriteId1 = new FavoriteId(1L, 2L);
         FavoriteId favoriteId2 = new FavoriteId(1L, 2L);
         FavoriteId favoriteId3 = new FavoriteId(1L, 3L);
@@ -65,7 +65,7 @@ class FavoriteIdTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         FavoriteId favoriteId1 = new FavoriteId(1L, 2L);
         FavoriteId favoriteId2 = new FavoriteId(1L, 2L);
         FavoriteId favoriteId3 = new FavoriteId(2L, 3L);
