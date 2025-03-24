@@ -98,7 +98,7 @@ class PlantTest {
     }
 
     @Test
-    void testInvalidPlantEssential() {
+    void testInvalidPlantEssentialFirstPart() {
         plant = new Plant.Builder().setScientificName(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setScientificName("").build();
@@ -128,7 +128,10 @@ class PlantTest {
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setWatering("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantEssentialSecondPart() {
         plant = new Plant.Builder().setSoil(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setSoil("").build();
