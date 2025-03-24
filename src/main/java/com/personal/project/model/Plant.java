@@ -133,7 +133,7 @@ public class Plant {
     /**
      * Species of the plant.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_species")
     @JsonManagedReference
     private Specie specie;
@@ -141,7 +141,7 @@ public class Plant {
     /**
      * Description of Environment.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_environment")
     @JsonManagedReference
     private Environment environment;
