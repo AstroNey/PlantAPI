@@ -1,5 +1,6 @@
 package com.personal.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -33,7 +34,8 @@ public class Specie {
     /**
      * Plants of the specie.
      */
-    @OneToMany(mappedBy = "specie", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "specie")
+    @JsonBackReference
     private Set<Plant> plants = new LinkedHashSet<>();
 
     /**

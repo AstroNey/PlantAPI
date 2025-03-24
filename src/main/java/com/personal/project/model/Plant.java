@@ -1,5 +1,6 @@
 package com.personal.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -134,6 +135,7 @@ public class Plant {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_species")
+    @JsonManagedReference
     private Specie specie;
 
     /**
@@ -141,12 +143,14 @@ public class Plant {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_environment")
+    @JsonManagedReference
     private Environment environment;
 
     /**
      * Regions where the plant can be found.
      */
     @ManyToMany(mappedBy = "plants")
+    @JsonManagedReference
     private Set<Region> regions;
 
     /**
@@ -416,7 +420,7 @@ public class Plant {
          * @param newSpecie Species of the plant.
          * @return Builder.
          */
-        public Builder setSpecie(@Lazy final Specie newSpecie) {
+        public Builder setSpecie(final Specie newSpecie) {
             this.specie = newSpecie;
             return this;
         }
@@ -426,7 +430,7 @@ public class Plant {
          * @param newEnvironment Description of Environment.
          * @return Builder.
          */
-        public Builder setEnvironment(@Lazy final Environment newEnvironment) {
+        public Builder setEnvironment(final Environment newEnvironment) {
             this.environment = newEnvironment;
             return this;
         }
@@ -436,7 +440,7 @@ public class Plant {
          * @param newRegions Regions where the plant can be found.
          * @return Builder.
          */
-        public Builder setRegions(@Lazy final Set<Region> newRegions) {
+        public Builder setRegions(final Set<Region> newRegions) {
             this.regions = newRegions;
             return this;
         }
@@ -447,7 +451,7 @@ public class Plant {
          *                     which are favorite for certain users.
          * @return Builder.
          */
-        public Builder setFavorites(@Lazy final Set<Favorite> newFavorites) {
+        public Builder setFavorites(final Set<Favorite> newFavorites) {
             this.favorites = newFavorites;
             return this;
         }

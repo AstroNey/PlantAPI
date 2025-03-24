@@ -1,5 +1,6 @@
 package com.personal.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +41,7 @@ public class Environment {
      * Plants in the environment.
      */
     @OneToMany(mappedBy = "environment")
+    @JsonBackReference
     private Set<Plant> plants = new LinkedHashSet<>();
 
     /**
