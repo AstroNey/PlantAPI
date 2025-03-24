@@ -34,7 +34,7 @@ class FavoriteIdTest {
 
         // You can also check if the equals method behaves correctly with null values
         FavoriteId anotherFavoriteId = new FavoriteId(null, null);
-        assertEquals(favoriteId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
+        assertEquals(favoriteInvalidId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
     }
 
     @Test

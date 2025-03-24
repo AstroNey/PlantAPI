@@ -61,7 +61,7 @@ class PlantTest {
     }
 
     @Test
-    void testValidPlant() {
+    void testValidPlantEssential() {
         assertEquals(1L, plant.getId());
         assertEquals("ScientificName", plant.getScientificName());
         assertEquals("Name", plant.getName());
@@ -76,6 +76,12 @@ class PlantTest {
         assertEquals("Care", plant.getCare());
         assertEquals("Toxicity", plant.getToxicity());
         assertEquals("Image", plant.getImage());
+
+        validator.validate(plant).forEach(System.out::println);
+        assertTrue(validator.validate(plant).isEmpty(), "Expected no constraint violation");
+    }
+
+    void testValidPlantRelation() {
         assertEquals(1L, plant.getEnvironment().getId());
         assertEquals("Environment", plant.getEnvironment().getName());
         assertEquals(1L, plant.getSpecie().getId());
@@ -92,7 +98,7 @@ class PlantTest {
     }
 
     @Test
-    void testInvalidPlant() {
+    void testInvalidPlantEssential() {
         plant = new Plant.Builder().setScientificName(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setScientificName("").build();
@@ -155,6 +161,10 @@ class PlantTest {
         plant = new Plant.Builder().setImage("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
 
+    }
+
+    @Test
+    void testInvalidPlantRelation() {
         plant = new Plant.Builder().setEnvironment(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
 
