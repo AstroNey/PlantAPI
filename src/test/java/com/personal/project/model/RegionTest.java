@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockitoExtension.class)
-public class RegionTest {
+class RegionTest {
 
     private Validator validator;
 
     private Region region;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 

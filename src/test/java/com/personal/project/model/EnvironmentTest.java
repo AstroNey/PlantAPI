@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class EnvironmentTest {
+class EnvironmentTest {
 
     private Validator validator;
 
     private Environment environment;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 

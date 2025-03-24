@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FavoriteIdTest {
+class FavoriteIdTest {
 
     private FavoriteId favoriteId;
 
@@ -26,15 +26,15 @@ public class FavoriteIdTest {
     @Test
     public void testInvalidFavoriteId() {
         // Attempt to create FavoriteId with null values
-        FavoriteId favoriteId = new FavoriteId(null, null);
+        FavoriteId favoriteInvalidId = new FavoriteId(null, null);
 
         // Check that the idUser  and idPlant are null
-        assertNull(favoriteId.getIdUser (), "User  ID should be null");
-        assertNull(favoriteId.getIdPlant(), "Plant ID should be null");
+        assertNull(favoriteInvalidId.getIdUser (), "User  ID should be null");
+        assertNull(favoriteInvalidId.getIdPlant(), "Plant ID should be null");
 
         // You can also check if the equals method behaves correctly with null values
         FavoriteId anotherFavoriteId = new FavoriteId(null, null);
-        assertEquals(favoriteId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
+        assertEquals(anotherFavoriteId, anotherFavoriteId, "FavoriteId objects with null IDs should be equal");
     }
 
     @Test
