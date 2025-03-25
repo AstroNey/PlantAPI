@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static org.hibernate.annotations.LazyCollectionOption.EXTRA;
 
 /**
  * Specie class.
@@ -32,13 +31,6 @@ public class Specie {
     @NotNull
     @NotEmpty
     private String name;
-
-    /**
-     * Plants of the specie.
-     */
-    @OneToMany(mappedBy = "specie", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Plant> plants = new LinkedHashSet<>();
 
     /**
      * Protected constructor.

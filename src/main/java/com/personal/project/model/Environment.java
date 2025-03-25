@@ -32,13 +32,6 @@ public class Environment {
     private String name;
 
     /**
-     * Plants in the environment.
-     */
-    @OneToMany(mappedBy = "environment", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Plant> plants = new LinkedHashSet<>();
-
-    /**
      * Protected constructor.
      */
     protected Environment() { }

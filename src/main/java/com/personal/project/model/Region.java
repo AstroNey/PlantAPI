@@ -46,7 +46,6 @@ public class Region {
             joinColumns = @JoinColumn(name = "id_region"),
             inverseJoinColumns = @JoinColumn(name = "id_plant")
     )
-    @JsonIgnore
     private Set<Plant> plants = new HashSet<>();
 
     /**

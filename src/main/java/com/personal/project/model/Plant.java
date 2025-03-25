@@ -416,7 +416,7 @@ public class Plant {
          * @param newSpecie Species of the plant.
          * @return Builder.
          */
-        public Builder setSpecie(@Lazy final Specie newSpecie) {
+        public Builder setSpecie(final Specie newSpecie) {
             this.specie = newSpecie;
             return this;
         }
@@ -426,7 +426,7 @@ public class Plant {
          * @param newEnvironment Description of Environment.
          * @return Builder.
          */
-        public Builder setEnvironment(@Lazy final Environment newEnvironment) {
+        public Builder setEnvironment(final Environment newEnvironment) {
             this.environment = newEnvironment;
             return this;
         }
