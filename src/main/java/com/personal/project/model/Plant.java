@@ -150,7 +150,6 @@ public class Plant {
      * Regions where the plant can be found.
      */
     @ManyToMany(mappedBy = "plants")
-    @JsonManagedReference
     private Set<Region> regions;
 
     /**
