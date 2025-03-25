@@ -1,12 +1,8 @@
 package com.personal.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * Environment class.
