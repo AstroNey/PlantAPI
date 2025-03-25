@@ -34,7 +34,7 @@ class PlantTest {
 
         User user = new User(1L, "username", "password", "email", "ROLE_USER");
         FavoriteId favoriteId = new FavoriteId(user.getId(), 1L);
-        Favorite favorite = new Favorite(favoriteId, user, plant);
+        Favorite favorite = new Favorite(favoriteId);
         HashSet<Favorite> favorites = new HashSet<>();
         favorites.add(favorite);
 

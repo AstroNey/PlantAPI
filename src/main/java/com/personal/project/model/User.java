@@ -1,12 +1,11 @@
 package com.personal.project.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * User class.
@@ -51,6 +50,12 @@ public class User {
     @NotNull
     @NotEmpty
     private String password;
+
+    /**
+     *
+     */
+    @OneToMany
+    private Set<Favorite> favorites = new LinkedHashSet<>();
 
     /**
      * Protected constructor.

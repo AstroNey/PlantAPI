@@ -29,24 +29,6 @@ public class Favorite {
     private FavoriteId id;
 
     /**
-     * User who has the favorite.
-     */
-    @MapsId("idUser")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    @NotNull
-    private User user;
-
-    /**
-     * Plant that is favorite.
-     */
-    @MapsId("idPlant")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_plant")
-    @NotNull
-    private Plant plant;
-
-    /**
      * Date when the favorite was added.
      */
     @CreationTimestamp
@@ -61,17 +43,11 @@ public class Favorite {
     /**
      * Constructor.
      * @param newId FavoriteId
-     * @param newUser User
-     * @param newPlant Plant
      */
     public Favorite(
-            final FavoriteId newId,
-            @Lazy final User newUser,
-            @Lazy final Plant newPlant
+            final FavoriteId newId
     ) {
         this.id = newId;
-        this.user = newUser;
-        this.plant = newPlant;
     }
 
     /**
@@ -81,21 +57,4 @@ public class Favorite {
     public FavoriteId getId() {
         return id;
     }
-
-    /**
-     * Get user.
-     * @return user.
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * Get plant.
-     * @return plant.
-     */
-    public Plant getPlant() {
-        return plant;
-    }
-
 }

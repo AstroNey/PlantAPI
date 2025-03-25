@@ -137,7 +137,7 @@ public class Plant {
     /**
      * Regions where the plant can be found.
      */
-    @ManyToMany(mappedBy = "plants")
+    @ManyToMany
     @JoinTable(
             name = "plant_region",
             joinColumns = @JoinColumn(name = "id_plant"),
@@ -148,7 +148,7 @@ public class Plant {
     /**
      * Relation for the plant which are favorite for certain users.
      */
-    @OneToMany(mappedBy = "plant")
+    @OneToMany
     private Set<Favorite> favorites = new LinkedHashSet<>();
 
     /**

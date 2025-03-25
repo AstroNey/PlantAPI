@@ -41,23 +41,15 @@ class FavoriteTest {
                 .setToxicity("Toxicity")
                 .setImage("Image")
                 .build();
-        favorite = new Favorite(favoriteId, user, plant);
+        favorite = new Favorite(favoriteId);
     }
 
     @Test
     void testValidFavorite() {
         assertEquals(1L, favorite.getId().getIdUser());
         assertEquals(1L, favorite.getId().getIdPlant());
-        assertEquals("username", favorite.getUser().getName());
-        assertEquals("ScientificName", favorite.getPlant().getScientificName());
 
         validator.validate(favorite).forEach(System.out::println);
         assertTrue(validator.validate(favorite).isEmpty());
-    }
-
-    @Test
-    void testInvalidFavorite() {
-        favorite = new Favorite(new FavoriteId(1L, 1L), null, null);
-        assertFalse(validator.validate(favorite).isEmpty(), "Expected constraint violation");
     }
 }
