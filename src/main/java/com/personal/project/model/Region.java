@@ -38,17 +38,6 @@ public class Region {
     private String name;
 
     /**
-     * Plants in the region.
-     */
-    @ManyToMany
-    @JoinTable(
-            name = "region_plant",
-            joinColumns = @JoinColumn(name = "id_region"),
-            inverseJoinColumns = @JoinColumn(name = "id_plant")
-    )
-    private Set<Plant> plants = new HashSet<>();
-
-    /**
      * Protected constructor.
      */
     protected Region() { }

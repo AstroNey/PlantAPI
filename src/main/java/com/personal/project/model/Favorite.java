@@ -10,6 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Lazy;
+
 import java.time.LocalDate;
 
 /**
@@ -63,8 +65,9 @@ public class Favorite {
      * @param newPlant Plant
      */
     public Favorite(
-            final FavoriteId newId, final User newUser,
-            final Plant newPlant
+            final FavoriteId newId,
+            @Lazy final User newUser,
+            @Lazy final Plant newPlant
     ) {
         this.id = newId;
         this.user = newUser;

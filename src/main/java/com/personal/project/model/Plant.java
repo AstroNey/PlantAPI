@@ -1,15 +1,6 @@
 package com.personal.project.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -147,6 +138,11 @@ public class Plant {
      * Regions where the plant can be found.
      */
     @ManyToMany(mappedBy = "plants")
+    @JoinTable(
+            name = "plant_region",
+            joinColumns = @JoinColumn(name = "id_plant"),
+            inverseJoinColumns = @JoinColumn(name = "id_region")
+    )
     private Set<Region> regions;
 
     /**
