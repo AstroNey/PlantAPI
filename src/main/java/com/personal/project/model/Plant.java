@@ -13,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -415,7 +416,7 @@ public class Plant {
          * @param newSpecie Species of the plant.
          * @return Builder.
          */
-        public Builder setSpecie(final Specie newSpecie) {
+        public Builder setSpecie(@Lazy final Specie newSpecie) {
             this.specie = newSpecie;
             return this;
         }
@@ -425,7 +426,7 @@ public class Plant {
          * @param newEnvironment Description of Environment.
          * @return Builder.
          */
-        public Builder setEnvironment(final Environment newEnvironment) {
+        public Builder setEnvironment(@Lazy final Environment newEnvironment) {
             this.environment = newEnvironment;
             return this;
         }
