@@ -81,6 +81,7 @@ class PlantTest {
         assertTrue(validator.validate(plant).isEmpty(), "Expected no constraint violation");
     }
 
+    @Test
     void testValidPlantRelation() {
         assertEquals(1L, plant.getEnvironment().getId());
         assertEquals("Environment", plant.getEnvironment().getName());
@@ -98,37 +99,77 @@ class PlantTest {
     }
 
     @Test
-    void testInvalidPlantEssentialFirstPart() {
+    void testInvalidPlantId() {
+        plant = new Plant.Builder().setId(-1L).build();
+        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
+
+    @Test
+    void  testInvalidPlantScientificName() {
         plant = new Plant.Builder().setScientificName(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setScientificName("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantName() {
         plant = new Plant.Builder().setName(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setName("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantDescription() {
         plant = new Plant.Builder().setDescription(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setDescription("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantFoliage() {
         plant = new Plant.Builder().setFoliage(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setFoliage("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantSize() {
+        plant = new Plant.Builder().setSize(-0.1).build();
+        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+        plant = new Plant.Builder().setSize(0.0).build();
+        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
+
+    @Test
+    void testInvalidPlantFlowers() {
         plant = new Plant.Builder().setFlowers(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setFlowers("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantImage() {
+        plant = new Plant.Builder().setImage(null).build();
+        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+        plant = new Plant.Builder().setImage("").build();
+        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
+
+    @Test
+    void testInvalidPlantWatering() {
         plant = new Plant.Builder().setWatering(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setWatering("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantSoil() {
         plant = new Plant.Builder().setSoil(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setSoil("").build();
@@ -136,34 +177,37 @@ class PlantTest {
     }
 
     @Test
-    void testInvalidPlantEssentialSecondPart() {
+    void testInvalidPlantSunlight() {
         plant = new Plant.Builder().setSunlight(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setSunlight("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantTemperature() {
         plant = new Plant.Builder().setTemperature(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setTemperature("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setTemperature("12345678901").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation for temperature too long");
+    }
 
+    @Test
+    void testInvalidPlantCare() {
         plant = new Plant.Builder().setCare(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setCare("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
+    }
 
+    @Test
+    void testInvalidPlantToxicity() {
         plant = new Plant.Builder().setToxicity(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setToxicity("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-
-        plant = new Plant.Builder().setImage(null).build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-        plant = new Plant.Builder().setImage("").build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-
     }
 
     @Test
@@ -177,11 +221,6 @@ class PlantTest {
         plant = new Plant.Builder().setRegions(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setRegions(new HashSet<>()).build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-
-        plant = new Plant.Builder().setSize(-0.1).build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-        plant = new Plant.Builder().setSize(0.0).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
 
         plant = new Plant.Builder().setFavorites(null).build();
