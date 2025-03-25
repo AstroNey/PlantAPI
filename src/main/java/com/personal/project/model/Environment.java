@@ -1,6 +1,6 @@
 package com.personal.project.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +35,7 @@ public class Environment {
      * Plants in the environment.
      */
     @OneToMany(mappedBy = "environment", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Plant> plants = new LinkedHashSet<>();
 
     /**

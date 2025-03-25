@@ -1,11 +1,9 @@
 package com.personal.project.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -39,6 +37,7 @@ public class Specie {
      * Plants of the specie.
      */
     @OneToMany(mappedBy = "specie", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Plant> plants = new LinkedHashSet<>();
 
     /**

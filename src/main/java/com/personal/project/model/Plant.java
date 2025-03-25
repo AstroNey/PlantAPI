@@ -1,6 +1,5 @@
 package com.personal.project.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,6 @@ import jakarta.persistence.FetchType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.context.annotation.Lazy;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

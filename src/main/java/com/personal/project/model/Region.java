@@ -1,6 +1,5 @@
 package com.personal.project.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,6 +46,7 @@ public class Region {
             joinColumns = @JoinColumn(name = "id_region"),
             inverseJoinColumns = @JoinColumn(name = "id_plant")
     )
+    @JsonIgnore
     private Set<Plant> plants = new HashSet<>();
 
     /**
