@@ -15,10 +15,10 @@ public class FavoriteService {
 
     /**
      * Constructor.
-     * @param favoriteRepository Favorite repository.
+     * @param refFavoriteRepository Favorite repository.
      */
-    public FavoriteService(FavoriteRepository favoriteRepository) {
-        this.favoriteRepository = favoriteRepository;
+    public FavoriteService(final FavoriteRepository refFavoriteRepository) {
+        this.favoriteRepository = refFavoriteRepository;
     }
 
 }

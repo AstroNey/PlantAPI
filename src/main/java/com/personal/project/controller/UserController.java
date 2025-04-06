@@ -18,9 +18,9 @@ public class UserController {
 
     /**
      * Constructor.
-     * @param userService User service.
+     * @param refUserService User service.
      */
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(final UserService refUserService) {
+        this.userService = refUserService;
     }
 }

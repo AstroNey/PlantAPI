@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
  * Environment repository.
  */
 @Repository
-public interface EnvironmentRepository extends JpaRepository<Environment, Long> {
+public interface EnvironmentRepository
+        extends JpaRepository<Environment, Long> {
 }

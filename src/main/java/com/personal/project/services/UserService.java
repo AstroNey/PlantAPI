@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    /**
+     * User repository.
+     */
     private final UserRepository userRepository;
 
     /**
      * Constructor.
-     * @param userRepository User repository.
+     * @param refUserRepository User repository.
      */
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(final UserRepository refUserRepository) {
+        this.userRepository = refUserRepository;
     }
 }
