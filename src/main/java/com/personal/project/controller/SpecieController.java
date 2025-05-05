@@ -22,7 +22,7 @@ public class SpecieController {
     /**
      * Specie service.
      */
-    private SpecieService specieService;
+    private final SpecieService specieService;
 
     /**
      * Constructor.

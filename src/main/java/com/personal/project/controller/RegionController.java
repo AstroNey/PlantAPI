@@ -23,7 +23,7 @@ public class RegionController {
     /**
      * Region service.
      */
-    private RegionService regionService;
+    private final RegionService regionService;
 
     /**
      * Constructor.

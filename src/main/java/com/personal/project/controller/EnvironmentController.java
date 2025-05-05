@@ -53,7 +53,7 @@ public class EnvironmentController {
      * @return Get all environments
      */
     @GetMapping("/environments")
-    public ResponseEntity<List<Environment>> getSpecies() {
+    public ResponseEntity<List<Environment>> getEnvironments() {
         Optional<List<Environment>> optEnvironments
                 = environmentService.findAllEnvironment();
         return optEnvironments
