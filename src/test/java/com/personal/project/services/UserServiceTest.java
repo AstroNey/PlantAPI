@@ -1,6 +1,9 @@
 package com.personal.project.services;
 
+import com.password4j.Password;
+import com.personal.project.exception.InvalidMailException;
 import com.personal.project.model.User;
+import com.personal.project.model.requestModel.UserRequest;
 import com.personal.project.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +13,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
+
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -40,4 +44,52 @@ class UserServiceTest {
         Optional<User> foundUser = userService.findUserById(1L);
         assertTrue(foundUser.isEmpty());
     }
+
+    @Test
+    void createUserShouldReturnUserWhenValidInput() {
+        UserRequest request = new UserRequest("John", "Doe", "john.doe@example.com", "password123");
+        User expectedUser = new User("John", "Doe", "john.doe@example.com", "encodedPass123");
+
+        when(userRepository.save(any(User.class))).thenReturn(expectedUser);
+
+        User createdUser = userService.createUser(request);
+
+        assertNotNull(createdUser);
+        assertEquals(request.getName(), createdUser.getName());
+        assertEquals(request.getLastname(), createdUser.getLastName());
+        assertEquals(request.getEmail(), createdUser.getEmail());
+        assertTrue(
+                Password.check(request.getPassword(), createdUser.getPassword()).withArgon2()
+        );
+
+    }
+
+    @Test
+    void createUserShouldThrowInvalidMailExceptionWhenInvalidEmail() {
+        UserRequest request = new UserRequest("John", "Doe", "invalid-email", "password123");
+
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+    }
+
+    @Test
+    void createUserShouldThrowInvalidMailExceptionWhenEmailIsNull() {
+        UserRequest request = new UserRequest("John", "Doe", null, "password123");
+
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+    }
+
+    @Test
+    void createUserShouldThrowInvalidMailExceptionWhenEmailIsEmpty() {
+        UserRequest request = new UserRequest("John", "Doe", "", "password123");
+
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+    }
+
+    @Test
+    void createUserShouldThrowInvalidMailExceptionWhenEmailIsBlank() {
+        UserRequest request = new UserRequest("John", "Doe", "   ", "password123");
+
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+    }
+
 }

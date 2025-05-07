@@ -1,5 +1,6 @@
 package com.personal.project.model;
 
+import com.personal.project.tools.Tools;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -88,6 +89,25 @@ public class User {
     }
 
     /**
+     * Constructor.
+     * @param newName String
+     * @param newLastName String
+     * @param newEmail String
+     * @param newPassword String
+     */
+    public User(
+            final String newName,
+            final String newLastName,
+            final String newEmail,
+            final String newPassword
+    ) {
+        this.name = newName;
+        this.lastName = newLastName;
+        this.email = newEmail;
+        this.password = Tools.encryptPwd(newPassword);
+    }
+
+    /**
      * Get user id.
      * @return Long
      */
@@ -96,7 +116,7 @@ public class User {
     }
 
     /**
-     * Get user name.
+     * Get username.
      * @return name
      */
     public String getName() {

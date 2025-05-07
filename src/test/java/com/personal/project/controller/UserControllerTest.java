@@ -1,7 +1,9 @@
 package com.personal.project.controller;
 
 import com.personal.project.model.User;
+import com.personal.project.model.requestModel.UserRequest;
 import com.personal.project.services.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
@@ -46,5 +49,23 @@ public class UserControllerTest {
         // Assert the response status and body
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNull(response.getBody());
+    }
+
+    @Test
+    void createUserSuccess() {
+        UserRequest user = new UserRequest( "Name", "lastName", "Email",
+                "Password");
+        User createdUser = new User(1L, "Name", "lastName", "Email", "Password");
+        when(userService.createUser(any(UserRequest.class))).thenReturn(createdUser);
+
+        ResponseEntity<User> response = userController.createUser(user);
+
+        // Assert the response status and body
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertNotNull(response.getBody());
+        assertEquals(user.getName(), response.getBody().getName());
+        assertEquals(user.getLastname(), response.getBody().getLastName());
+        assertEquals(user.getEmail(), response.getBody().getEmail());
+        assertEquals(user.getPassword(), response.getBody().getPassword());
     }
 }
