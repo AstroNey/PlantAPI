@@ -23,8 +23,23 @@ class FavoriteTest {
         validator = factory.getValidator();
 
         User user = new User(1L, "username", "password", "email", "ROLE_USER");
-        FavoriteId favoriteId = new FavoriteId(user.getId(), 1L);
-        favorite = new Favorite(favoriteId);
+        Plant plant = new Plant.Builder()
+                .setId(1L)
+                .setScientificName("ScientificName")
+                .setName("Name")
+                .setFoliage("Foliage")
+                .setFlowers("Flowers")
+                .setSize(0.6)
+                .setSunlight("Sunlight")
+                .setWatering("Watering")
+                .setSoil("Soil")
+                .setTemperature("Temp")
+                .setCare("Care")
+                .setToxicity("Toxicity")
+                .setImage("Image")
+                .build();
+        favorite = new Favorite(user, plant);
+        plant.addFavorite(favorite);
     }
 
     @Test

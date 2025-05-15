@@ -1,12 +1,7 @@
 package com.personal.project.model;
 
 import com.personal.project.tools.Tools;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -60,8 +55,8 @@ public class User {
     /**
      *
      */
-    @OneToMany
-    private Set<Favorite> favorites = new LinkedHashSet<>(); //TODO
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private final Set<Favorite> favorites = new LinkedHashSet<>();
 
     /**
      * Protected constructor.

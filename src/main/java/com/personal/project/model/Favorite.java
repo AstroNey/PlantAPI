@@ -1,9 +1,6 @@
 package com.personal.project.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -13,14 +10,26 @@ import java.time.LocalDate;
  * Represents a favorite plant.
  */
 @Entity
-@Table(name = "favorite")
+@Table(name = "favorites")
 public class Favorite {
+
+    // TODO adapt some tests
 
     /**
      * Id favorite comes from composed key.
      */
     @EmbeddedId
     private FavoriteId id;
+
+    @ManyToOne
+    @MapsId("idPlant")
+    @JoinColumn(name = "id_plant")
+    private Plant plant;
+
+    @ManyToOne
+    @MapsId("idUser")
+    @JoinColumn(name = "id_user")
+    private User user;
 
     /**
      * Date when the favorite was added.
@@ -36,12 +45,14 @@ public class Favorite {
 
     /**
      * Constructor.
-     * @param newId FavoriteId
+     * @param user User.
+     * @param plant Plant.
      */
-    public Favorite(
-            final FavoriteId newId
-    ) {
-        this.id = newId;
+    public Favorite(final User user, final Plant plant) {
+        this.user = user;
+        this.plant = plant;
+        this.id = new FavoriteId(user.getId(), plant.getId());
+        this.addedOn = LocalDate.now();
     }
 
     /**

@@ -49,7 +49,6 @@ class PlantControllerWebLayerTest {
                 .setId(1L)
                 .setScientificName("ScientificName")
                 .setName("Name")
-                .setDescription("Description")
                 .setFoliage("Foliage")
                 .setFlowers("Flowers")
                 .setSize(0.6)

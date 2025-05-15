@@ -1,16 +1,6 @@
 package com.personal.project.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -47,13 +37,6 @@ public class Plant {
     @NotNull
     @NotEmpty
     private String name;
-
-    /**
-     * Description of the plant.
-     */
-    @NotNull
-    @NotEmpty
-    private String description;
 
     /**
      * Foliage of the plant.
@@ -133,14 +116,14 @@ public class Plant {
     /**
      * Species of the plant.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_species")
     private Specie specie;
 
     /**
      * Description of Environment.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_environment")
     private Environment environment;
 
@@ -158,7 +141,7 @@ public class Plant {
     /**
      * Relation for the plant which are favorite for certain users.
      */
-    @OneToMany
+    @OneToMany(mappedBy = "plant", cascade = CascadeType.ALL)
     private Set<Favorite> favorites = new LinkedHashSet<>();
 
     /**
@@ -176,7 +159,6 @@ public class Plant {
         this.id = builder.id;
         this.scientificName = builder.scientificName;
         this.name = builder.name;
-        this.description = builder.description;
         this.foliage = builder.foliage;
         this.flowers = builder.flowers;
         this.size = builder.size;
@@ -190,7 +172,8 @@ public class Plant {
         this.specie = builder.specie;
         this.environment = builder.environment;
         this.regions = builder.regions;
-        this.favorites = builder.favorites;
+        this.favorites = builder.favorites != null
+                ? builder.favorites : new LinkedHashSet<>();
     }
 
     /**
@@ -209,10 +192,6 @@ public class Plant {
          * Name of the plant.
          */
         private String name;
-        /**
-         * Description of the plant.
-         */
-        private String description;
         /**
          * Foliage of the plant.
          */
@@ -304,16 +283,6 @@ public class Plant {
          */
         public Builder setName(final String newName) {
             this.name = newName;
-            return this;
-        }
-
-        /**
-         * Setters for the Plant.
-         * @param newDescription Description of the plant.
-         * @return Builder.
-         */
-        public Builder setDescription(final String newDescription) {
-            this.description = newDescription;
             return this;
         }
 
@@ -492,14 +461,6 @@ public class Plant {
     }
 
     /**
-     * Getters for description.
-     * @return Description of the plant.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * Getters for foliage.
      * @return Foliage of the plant.
      */
@@ -610,5 +571,14 @@ public class Plant {
     public Set<Favorite> getFavorites() {
         return this.favorites;
     }
+
+    /**
+     * Add a favorite to the plant.
+     * @param favorite Favorite to add.
+     */
+    public void addFavorite(Favorite favorite) {
+        this.getFavorites().add(favorite);
+    }
+
 
 }

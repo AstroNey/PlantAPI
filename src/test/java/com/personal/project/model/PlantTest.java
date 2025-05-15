@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,27 +23,25 @@ class PlantTest {
 
     @BeforeEach
     void setUp() {
+        // Initialisation du validator
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
+        // Création des entités simples
         Specie specie = new Specie(1L, "Specie");
         Environment environment = new Environment(1L, "Environment");
 
         Region region = new Region(1L, "Region");
-        HashSet<Region> regions = new HashSet<>();
+        Set<Region> regions = new HashSet<>();
         regions.add(region);
 
         User user = new User(1L, "username", "password", "email", "ROLE_USER");
-        FavoriteId favoriteId = new FavoriteId(user.getId(), 1L);
-        Favorite favorite = new Favorite(favoriteId);
-        HashSet<Favorite> favorites = new HashSet<>();
-        favorites.add(favorite);
 
+        // Création de la plante (sans les favoris pour l'instant)
         plant = new Plant.Builder()
                 .setId(1L)
                 .setScientificName("ScientificName")
                 .setName("Name")
-                .setDescription("Description")
                 .setFoliage("Foliage")
                 .setFlowers("Flowers")
                 .setSize(0.6)
@@ -56,8 +55,12 @@ class PlantTest {
                 .setEnvironment(environment)
                 .setSpecie(specie)
                 .setRegions(regions)
-                .setFavorites(favorites)
                 .build();
+
+        // Création des favoris maintenant que la plante est disponible
+        Favorite favorite = new Favorite(user, plant);
+        // Ajout des favoris à la plante
+        plant.addFavorite(favorite);
     }
 
     @Test
@@ -65,7 +68,6 @@ class PlantTest {
         assertEquals(1L, plant.getId());
         assertEquals("ScientificName", plant.getScientificName());
         assertEquals("Name", plant.getName());
-        assertEquals("Description", plant.getDescription());
         assertEquals("Foliage", plant.getFoliage());
         assertEquals("Flowers", plant.getFlowers());
         assertEquals(0.6, plant.getSize());
@@ -117,14 +119,6 @@ class PlantTest {
         plant = new Plant.Builder().setName(null).build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
         plant = new Plant.Builder().setName("").build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-    }
-
-    @Test
-    void testInvalidPlantDescription() {
-        plant = new Plant.Builder().setDescription(null).build();
-        assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
-        plant = new Plant.Builder().setDescription("").build();
         assertFalse(validator.validate(plant).isEmpty(), "Expected constraint violation");
     }
 

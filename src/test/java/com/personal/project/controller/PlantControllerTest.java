@@ -50,7 +50,6 @@ class PlantControllerTest {
                 .setId(1L)
                 .setScientificName("ScientificName")
                 .setName("Name")
-                .setDescription("Description")
                 .setFoliage("Foliage")
                 .setFlowers("Flowers")
                 .setSize(0.6)
@@ -68,7 +67,6 @@ class PlantControllerTest {
 
         plant2 = new Plant.Builder()
                 .setName("Name2")
-                .setDescription("Description2")
                 .setFoliage("Foliage2")
                 .setFlowers("Flowers2")
                 .setSize(0.7)
