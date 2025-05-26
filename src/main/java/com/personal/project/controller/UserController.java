@@ -2,7 +2,7 @@ package com.personal.project.controller;
 
 import com.personal.project.exception.InvalidMailException;
 import com.personal.project.model.User;
-import com.personal.project.model.requestModel.UserRequest;
+import com.personal.project.model.request.UserRequest;
 import com.personal.project.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

@@ -55,9 +55,8 @@ public class SpecieController {
         Optional<List<Specie>> optSpecies = specieService.findAllSpecie();
         return optSpecies
                 .map(ArrayList::new)
-                .map(species -> {
-                    return ResponseEntity.ok(species.stream().toList());
-                })
+                .map(species ->
+                    ResponseEntity.ok(species.stream().toList()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -3,7 +3,7 @@ package com.personal.project.services;
 import com.password4j.Password;
 import com.personal.project.exception.InvalidMailException;
 import com.personal.project.model.User;
-import com.personal.project.model.requestModel.UserRequest;
+import com.personal.project.model.request.UserRequest;
 import com.personal.project.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -79,10 +79,10 @@ class UserServiceTest {
 
         UserRequest request4 = new UserRequest("John", "Doe", "",
                 "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request4));
 
         UserRequest request5 = new UserRequest("John", "Doe", "   ",
                 "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request5));
     }
 }

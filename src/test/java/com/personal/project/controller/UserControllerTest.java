@@ -1,7 +1,7 @@
 package com.personal.project.controller;
 
 import com.personal.project.model.User;
-import com.personal.project.model.requestModel.UserRequest;
+import com.personal.project.model.request.UserRequest;
 import com.personal.project.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

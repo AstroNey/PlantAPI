@@ -1,4 +1,4 @@
-package com.personal.project.model.requestModel;
+package com.personal.project.model.request;
 
 /**
  * User request to create or modify.

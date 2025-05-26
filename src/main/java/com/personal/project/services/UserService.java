@@ -2,7 +2,7 @@ package com.personal.project.services;
 
 import com.personal.project.exception.InvalidMailException;
 import com.personal.project.model.User;
-import com.personal.project.model.requestModel.UserRequest;
+import com.personal.project.model.request.UserRequest;
 import com.personal.project.repository.UserRepository;
 import com.personal.project.tools.Tools;
 import org.springframework.stereotype.Service;

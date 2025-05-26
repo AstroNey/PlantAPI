@@ -16,8 +16,15 @@ public class Tools {
     /**
      * The constant EMAIL_REGEX.
      */
-    private final static String emailRegex =
+    private static final String EMAIL_REGEX =
             "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private Tools() {
+        // Private constructor to prevent instantiation
+    }
 
     /**
      * Encrypt password.
@@ -38,7 +45,7 @@ public class Tools {
         boolean isValid = false;
 
         if (newEmail != null && !newEmail.trim().isEmpty()) {
-            Pattern pattern = Pattern.compile(emailRegex);
+            Pattern pattern = Pattern.compile(EMAIL_REGEX);
             Matcher matcher = pattern.matcher(newEmail);
             isValid = matcher.matches();
         }
