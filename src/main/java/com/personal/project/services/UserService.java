@@ -43,7 +43,6 @@ public class UserService {
      * @return the created user
      */
     public User createUser(final UserRequest user) {
-        boolean test = Tools.isValidEmail(user.getEmail());
         if (!Tools.isValidEmail(user.getEmail())) {
             throw new InvalidMailException("Invalid email");
         }

@@ -55,7 +55,7 @@ class EnvironmentControllerWebLayerTest {
         when(environmentService.findEnvironmentById(42L))
                 .thenReturn(Optional.of(env));
 
-        mockMvc.perform(get("/environment/42"))
+        mockMvc.perform(get("/environments/42"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(42L))
@@ -67,7 +67,7 @@ class EnvironmentControllerWebLayerTest {
         when(environmentService.findEnvironmentById(99L))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/environment/99"))
+        mockMvc.perform(get("/environments/99"))
                 .andExpect(status().isNotFound());
     }
 }

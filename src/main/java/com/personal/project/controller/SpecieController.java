@@ -37,7 +37,7 @@ public class SpecieController {
      * @param id the id
      * @return one specie by id
      */
-    @GetMapping("/specie/{id}")
+    @GetMapping("/species/{id}")
     public ResponseEntity<Specie> getSpecieById(
             @PathVariable("id") final Long id
     ) {

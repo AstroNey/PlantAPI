@@ -56,7 +56,7 @@ class SpecieControllerWebLayerTest {
         when(specieService.findSpecieById(42L))
                 .thenReturn(Optional.of(specie));
 
-        mockMvc.perform(get("/specie/42"))
+        mockMvc.perform(get("/species/42"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(42L))
@@ -68,7 +68,7 @@ class SpecieControllerWebLayerTest {
         when(specieService.findSpecieById(99L))
                 .thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/specie/99"))
+        mockMvc.perform(get("/species/99"))
                 .andExpect(status().isNotFound());
     }
 }

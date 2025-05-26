@@ -39,7 +39,7 @@ public class EnvironmentController {
      * @param id the id
      * @return one environment by id
      */
-    @GetMapping("/environment/{id}")
+    @GetMapping("/environments/{id}")
     public ResponseEntity<Environment> getEnvironmentById(
             @PathVariable("id") final Long id
     ) {

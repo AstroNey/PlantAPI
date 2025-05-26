@@ -1,7 +1,14 @@
 package com.personal.project.model;
 
 import com.personal.project.tools.Tools;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -55,7 +62,8 @@ public class User {
     /**
      *
      */
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private final Set<Favorite> favorites = new LinkedHashSet<>();
 
     /**
@@ -140,5 +148,13 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Get user favorites.
+     * @return Set of Favorite
+     */
+    public Set<Favorite> getFavorites() {
+        return favorites;
     }
 }
