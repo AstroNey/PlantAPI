@@ -16,7 +16,7 @@ public class Tools {
     /**
      * The constant EMAIL_REGEX.
      */
-    private final String emailRegex =
+    private final static String emailRegex =
             "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     /**
@@ -38,8 +38,7 @@ public class Tools {
         boolean isValid = false;
 
         if (newEmail != null && !newEmail.trim().isEmpty()) {
-            Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]"
-                    + "+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+            Pattern pattern = Pattern.compile(emailRegex);
             Matcher matcher = pattern.matcher(newEmail);
             isValid = matcher.matches();
         }

@@ -58,9 +58,8 @@ public class EnvironmentController {
                 = environmentService.findAllEnvironment();
         return optEnvironments
                 .map(ArrayList::new)
-                .map(environments -> {
-                    return ResponseEntity.ok(environments.stream().toList());
-                })
+                .map(environments ->
+                        ResponseEntity.ok(environments.stream().toList()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

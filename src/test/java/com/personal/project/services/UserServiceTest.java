@@ -67,29 +67,22 @@ class UserServiceTest {
     @Test
     void createUserShouldThrowInvalidMailExceptionWhenInvalidEmail() {
         UserRequest request = new UserRequest("John", "Doe", "invalid-email", "password123");
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
 
+        UserRequest request2 = new UserRequest("John", "Doe", null,
+                "password123");
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request2));
+
+        UserRequest request3 = new UserRequest("John", "Doe", "",
+                "password123");
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request3));
+
+        UserRequest request4 = new UserRequest("John", "Doe", "",
+                "password123");
+        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
+
+        UserRequest request5 = new UserRequest("John", "Doe", "   ",
+                "password123");
         assertThrows(InvalidMailException.class, () -> userService.createUser(request));
     }
-
-    @Test
-    void createUserShouldThrowInvalidMailExceptionWhenEmailIsNull() {
-        UserRequest request = new UserRequest("John", "Doe", null, "password123");
-
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
-    }
-
-    @Test
-    void createUserShouldThrowInvalidMailExceptionWhenEmailIsEmpty() {
-        UserRequest request = new UserRequest("John", "Doe", "", "password123");
-
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
-    }
-
-    @Test
-    void createUserShouldThrowInvalidMailExceptionWhenEmailIsBlank() {
-        UserRequest request = new UserRequest("John", "Doe", "   ", "password123");
-
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
-    }
-
 }

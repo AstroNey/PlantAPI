@@ -56,9 +56,8 @@ public class RegionController {
         Optional<List<Region>> optRegions = regionService.findAllRegions();
         return optRegions
                 .map(ArrayList::new)
-                .map(regions -> {
-                    return ResponseEntity.ok(regions.stream().toList());
-                })
+                .map(regions ->
+                        ResponseEntity.ok(regions.stream().toList()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
