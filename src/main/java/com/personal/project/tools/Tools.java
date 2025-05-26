@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Tools class.
  * Contains utility methods.
  */
-public class Tools {
+public final class Tools {
 
     /**
      * The constant EMAIL_REGEX.

@@ -590,7 +590,7 @@ public class Plant {
      * Add a favorite to the plant.
      * @param favorite Favorite to add.
      */
-    public void addFavorite(Favorite favorite) {
+    public void addFavorite(final Favorite favorite) {
         this.getFavorites().add(favorite);
     }
 
