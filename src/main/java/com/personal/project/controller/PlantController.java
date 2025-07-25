@@ -57,7 +57,8 @@ public class PlantController {
     ResponseEntity<Page<Plant>> getPlantsWithLimits(
             @RequestParam final int size
     ) {
-        Pageable pageable = PageRequest.of(0, size);
+        int pageSize = size/10;
+        Pageable pageable = PageRequest.of(pageSize < 2 ? 0 : pageSize, size);
         Page<Plant> plants = plantService.findPlantsWithLimit(pageable);
         return plants.hasContent()
                 ? ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
