@@ -7,17 +7,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
  * Plant controller.
  */
 @RestController
+@RequestMapping("/plants")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PlantController {
 
@@ -39,7 +38,7 @@ public class PlantController {
      * @param id the id
      * @return one plant by id
      */
-    @GetMapping("/plants/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Plant> getPlantById(
             @PathVariable("id") final Long id
     ) {
@@ -49,18 +48,31 @@ public class PlantController {
     }
 
     /**
-     * Get all plants if data exist.
-     * @param size the number of elements we want in the page.
-     * @return Get all plants with limit.
+     * Get all plants.
+     * @return all plants
      */
-    @GetMapping("/plants")
-    ResponseEntity<Page<Plant>> getPlantsWithLimits(
-            @RequestParam final int size
+    @GetMapping()
+    public ResponseEntity<List<Plant>> getAllPlants() {
+        List<Plant> plants = plantService.findAllPlants();
+        return plants.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(plants);
+    }
+
+    /**
+     * Get all plants by filter.
+     * @param name the name
+     * @param idRegion the id region
+     * @return all plants by filter
+     */
+    @GetMapping("/filter")
+    public ResponseEntity<List<Plant>> getAllPlantsByFilter(
+            @RequestParam(value = "name", required = false, defaultValue = "") final String name,
+            @RequestParam(value = "idRegion", required = false, defaultValue = "0") final long idRegion
     ) {
-        int pageSize = size/10;
-        Pageable pageable = PageRequest.of(pageSize < 2 ? 0 : pageSize, size);
-        Page<Plant> plants = plantService.findPlantsWithLimit(pageable);
-        return plants.hasContent()
-                ? ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
+        List<Plant> plants = plantService.findAllPlantsByFilter(name, idRegion);
+        return plants.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(plants);
     }
 }

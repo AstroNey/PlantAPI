@@ -54,4 +54,6 @@ class PlantServiceTest {
         Optional<Plant> foundPlant = plantService.findPlantById(1L);
         assertTrue(foundPlant.isEmpty());
     }
+
+    //TODO GET ALL PLANTS TESTS
 }

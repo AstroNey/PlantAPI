@@ -3,19 +3,23 @@ package com.personal.project.repository;
 import com.personal.project.model.Plant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Plant repository.
  */
 @Repository
-public interface PlantRepository extends JpaRepository<Plant, Long> {
+public interface PlantRepository extends JpaRepository<Plant, Long>, JpaSpecificationExecutor<Plant> {
 
-    /**
-     * Find all plant to use for limited request.
-     * @param pageable the pageable to request a paged result.
-     * @return the page with contents.
+    /** Find all plants by specification.
+     * @param specification the specification
+     * @return list of plants
      */
-    Page<Plant> findAll(Pageable pageable);
+    List<Plant> findAll(Specification<Plant> specification);
 }

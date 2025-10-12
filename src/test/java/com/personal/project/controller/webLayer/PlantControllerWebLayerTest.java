@@ -83,16 +83,4 @@ class PlantControllerWebLayerTest {
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
-
-    @Test
-    void getPlantsWithLimitSuccess() throws Exception {
-        Pageable pageable = PageRequest.of(0, 1);
-        when(plantService.findPlantsWithLimit(pageable)).thenReturn(new PageImpl<>(List.of(testPlant), pageable, 1));
-
-        mockMvc.perform(get("/plants")
-                        .param("size", "1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.content[0].id").value(1L));
-    }
 }

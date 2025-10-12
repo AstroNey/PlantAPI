@@ -1,11 +1,14 @@
 package com.personal.project.services;
 
 import com.personal.project.model.Plant;
+import com.personal.project.model.specification.PlantSpecification;
 import com.personal.project.repository.PlantRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -37,11 +40,27 @@ public class PlantService {
     }
 
     /**
-     * Get all plants with limit.
-     * @param pageable the page created with the plants.
-     * @return the number of plant define by limit.
+     * Get all plants.
+     * @return all plants
      */
-    public Page<Plant> findPlantsWithLimit(final Pageable pageable) {
-        return plantRepository.findAll(pageable);
+    public List<Plant> findAllPlants() {
+        return plantRepository.findAll();
+    }
+
+
+    /**
+     * Get all plants by filter.
+     * @param name the name of the plant
+     * @param idRegion the id of the region
+     * @return all plants by filter
+     */
+    public List<Plant> findAllPlantsByFilter(
+            final String name,
+            final long idRegion
+    ) {
+        Specification<Plant> specification = Specification
+                .where(PlantSpecification.nameStartWith(name))
+                .and(PlantSpecification.hasRegion(idRegion));
+        return plantRepository.findAll(specification);
     }
 }
