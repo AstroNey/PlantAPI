@@ -3,11 +3,13 @@ package com.personal.project.controller;
 
 import com.personal.project.model.Plant;
 import com.personal.project.services.PlantService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -67,8 +69,14 @@ public class PlantController {
      */
     @GetMapping("/filter")
     public ResponseEntity<List<Plant>> getAllPlantsByFilter(
-            @RequestParam(value = "name", required = false, defaultValue = "") final String name,
-            @RequestParam(value = "idRegion", required = false, defaultValue = "0") final long idRegion
+            @RequestParam(
+                    value = "name",
+                    required = false,
+                    defaultValue = "") final String name,
+            @RequestParam(
+                    value = "idRegion",
+                    required = false,
+                    defaultValue = "0") final long idRegion
     ) {
         List<Plant> plants = plantService.findAllPlantsByFilter(name, idRegion);
         return plants.isEmpty()
