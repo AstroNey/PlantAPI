@@ -81,7 +81,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=astroney_plant \
+            -Dsonar.projectKey=astroney_api \
             -Dsonar.organization=astroney \
             -Dsonar.host.url=https://sonarcloud.io
 
