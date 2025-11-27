@@ -4,18 +4,21 @@ package com.personal.project.controller;
 import com.personal.project.model.Plant;
 import com.personal.project.services.PlantService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Plant controller.
  */
 @RestController
+@RequestMapping("/plants")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PlantController {
 
@@ -37,7 +40,7 @@ public class PlantController {
      * @param id the id
      * @return one plant by id
      */
-    @GetMapping("/plants/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Plant> getPlantById(
             @PathVariable("id") final Long id
     ) {
@@ -47,14 +50,37 @@ public class PlantController {
     }
 
     /**
-     * Get all plants if data exist.
-     * @return Get all plants
+     * Get all plants.
+     * @return all plants
      */
-    @GetMapping("/plants")
-    public ResponseEntity<List<Plant>> getPlants() {
-        Iterable<Plant> iterablePlants = plantService.findPlants();
-        List<Plant> plants = new ArrayList<>();
-        iterablePlants.forEach(plants::add);
-        return !plants.isEmpty() ?  ResponseEntity.ok(plants) : ResponseEntity.notFound().build();
+    @GetMapping()
+    public ResponseEntity<List<Plant>> getAllPlants() {
+        List<Plant> plants = plantService.findAllPlants();
+        return plants.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(plants);
+    }
+
+    /**
+     * Get all plants by filter.
+     * @param name the name
+     * @param idRegion the id region
+     * @return all plants by filter
+     */
+    @GetMapping("/filter")
+    public ResponseEntity<List<Plant>> getAllPlantsByFilter(
+            @RequestParam(
+                    value = "name",
+                    required = false,
+                    defaultValue = "") final String name,
+            @RequestParam(
+                    value = "idRegion",
+                    required = false,
+                    defaultValue = "0") final long idRegion
+    ) {
+        List<Plant> plants = plantService.findAllPlantsByFilter(name, idRegion);
+        return plants.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(plants);
     }
 }

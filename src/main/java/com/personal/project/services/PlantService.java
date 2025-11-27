@@ -1,8 +1,9 @@
 package com.personal.project.services;
 
 import com.personal.project.model.Plant;
+import com.personal.project.model.specification.PlantSpecification;
 import com.personal.project.repository.PlantRepository;
-import io.micrometer.observation.ObservationFilter;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,27 @@ public class PlantService {
     }
 
     /**
-     * Get all plants without limits.
-     * @return all plants.
+     * Get all plants.
+     * @return all plants
      */
-    public Iterable<Plant> findPlants() { return plantRepository.findAll(); }
+    public List<Plant> findAllPlants() {
+        return plantRepository.findAll();
+    }
+
+
+    /**
+     * Get all plants by filter.
+     * @param name the name of the plant
+     * @param idRegion the id of the region
+     * @return all plants by filter
+     */
+    public List<Plant> findAllPlantsByFilter(
+            final String name,
+            final long idRegion
+    ) {
+        Specification<Plant> specification = Specification
+                .where(PlantSpecification.nameStartWith(name))
+                .and(PlantSpecification.hasRegion(idRegion));
+        return plantRepository.findAll(specification);
+    }
 }
