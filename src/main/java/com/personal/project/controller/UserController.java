@@ -12,22 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * User controller.
- */
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
-    /**
-     * User service.
-     */
     private final UserService userService;
 
-    /**
-     * Constructor.
-     * @param refUserService User service.
-     */
     public UserController(final UserService refUserService) {
         this.userService = refUserService;
     }

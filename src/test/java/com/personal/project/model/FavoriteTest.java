@@ -1,6 +1,6 @@
 package com.personal.project.model;
 
-import jakarta.validation.Validation;
+import com.personal.project.model.builders.PlantBuilder;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static jakarta.validation.Validation.buildDefaultValidatorFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,24 +20,25 @@ class FavoriteTest {
 
     @BeforeEach
     void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (ValidatorFactory factory = buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         User user = new User(1L, "username", "password", "email", "ROLE_USER");
-        Plant plant = new Plant.Builder()
+        Plant plant = new PlantBuilder()
                 .setId(1L)
-                .setScientificName("ScientificName")
-                .setName("Name")
-                .setFoliage("Foliage")
-                .setFlowers("Flowers")
-                .setSize(0.6)
-                .setSunlight("Sunlight")
-                .setWatering("Watering")
-                .setSoil("Soil")
-                .setTemperature("Temp")
-                .setCare("Care")
-                .setToxicity("Toxicity")
-                .setImage("Image")
+                .setScientificName("Ficus lyrata")
+                .setName("Fiddle Leaf Fig")
+                .setFoliage("Large, violin-shaped leaves")
+                .setFlowers("Small, insignificant flowers")
+                .setSize(150.0)
+                .setSunlight("Bright, indirect light")
+                .setWatering("Water when top inch of soil is dry")
+                .setSoil("Well-draining potting mix")
+                .setTemperature("65-75°F (18-24°C)")
+                .setCare("Wipe leaves to remove dust, rotate regularly")
+                .setToxicity("Toxic to pets if ingested")
+                .setImage("ficus_lyrata.jpg")
                 .build();
         favorite = new Favorite(user, plant);
         plant.addFavorite(favorite);

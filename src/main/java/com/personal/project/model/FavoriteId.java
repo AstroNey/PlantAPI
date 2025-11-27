@@ -3,59 +3,25 @@ package com.personal.project.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-/**
- * FavoriteId class, composite key for Favorite.
- */
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Embeddable
 public class FavoriteId implements java.io.Serializable {
 
-    /**
-     * Id user.
-     */
     @NotNull
     @Column(name = "id_user", nullable = false)
     private Long idUser;
 
-    /**
-     * Id plant.
-     */
     @NotNull
     @Column(name = "id_plant", nullable = false)
     private Long idPlant;
-
-    /**
-     * Protected constructor.
-     */
-    protected FavoriteId() { }
-
-    /**
-     * Constructor.
-     * @param newIdUser id user.
-     * @param newIdPlant id plant.
-     */
-    public FavoriteId(final Long newIdUser, final Long newIdPlant) {
-        this.idUser = newIdUser;
-        this.idPlant = newIdPlant;
-    }
-
-    /**
-     * Get id user.
-     * @return id user.
-     */
-    public Long getIdUser() {
-        return idUser;
-    }
-
-    /**
-     * Get id plant.
-     * @return id plant.
-     */
-    public Long getIdPlant() {
-        return idPlant;
-    }
 
     /**
      * Override Equals method.

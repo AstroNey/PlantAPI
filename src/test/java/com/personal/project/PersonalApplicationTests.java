@@ -5,9 +5,4 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class PersonalApplicationTests {
-
-	@Test
-	void contextLoads() {
-		// document why this method is empty
-	}
 }

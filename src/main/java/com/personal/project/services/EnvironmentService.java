@@ -13,33 +13,17 @@ import java.util.Optional;
 @Service
 public class EnvironmentService {
 
-    /**
-     * Region repository.
-     */
     private final EnvironmentRepository environmentRepository;
 
-    /**
-     * Constructor.
-     * @param refEnvironmentRepository Environment repository.
-     */
     public EnvironmentService(
             final EnvironmentRepository refEnvironmentRepository) {
         this.environmentRepository = refEnvironmentRepository;
     }
 
-    /**
-     * Find environment by id.
-     * @param id Environment id.
-     * @return Environment.
-     */
     public Optional<Environment> findEnvironmentById(final Long id) {
         return environmentRepository.findById(id);
     }
 
-    /**
-     * Find all environment.
-     * @return List of environment.
-     */
     public Optional<List<Environment>> findAllEnvironment() {
         return Optional.of(environmentRepository.findAll());
     }

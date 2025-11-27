@@ -12,22 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Specie controller.
- */
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class SpecieController {
 
-    /**
-     * Specie service.
-     */
     private final SpecieService specieService;
 
-    /**
-     * Constructor.
-     * @param refSpecieService Region service.
-     */
     public SpecieController(final SpecieService refSpecieService) {
         this.specieService = refSpecieService;
     }

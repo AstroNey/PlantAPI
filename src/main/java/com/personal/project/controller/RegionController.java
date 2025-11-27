@@ -13,22 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Specie controller.
- */
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class RegionController {
 
-    /**
-     * Region service.
-     */
     private final RegionService regionService;
 
-    /**
-     * Constructor.
-     * @param refRegionService Region service.
-     */
     public RegionController(final RegionService refRegionService) {
         this.regionService = refRegionService;
     }

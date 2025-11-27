@@ -22,15 +22,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class PlantController {
 
-    /**
-     * Plant service.
-     */
     private final PlantService plantService;
 
-    /**
-     * Constructor for PlantController.
-     * @param refPlantService the plant service
-     */
     public PlantController(final PlantService refPlantService) {
         this.plantService = refPlantService;
     }

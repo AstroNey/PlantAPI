@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.personal</groupId>
 	<artifactId>personal</artifactId>
@@ -75,8 +75,13 @@
 			<artifactId>password4j</artifactId>
 			<version>1.7.3</version>
 		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

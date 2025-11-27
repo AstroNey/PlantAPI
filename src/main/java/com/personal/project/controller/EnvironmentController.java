@@ -20,15 +20,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EnvironmentController {
 
-    /**
-     * Environment service.
-     */
     private final EnvironmentService environmentService;
 
-    /**
-     * Constructor for EnvironmentController.
-     * @param refEnvironmentService the environment service
-     */
     public EnvironmentController(
             final EnvironmentService refEnvironmentService) {
         this.environmentService = refEnvironmentService;
