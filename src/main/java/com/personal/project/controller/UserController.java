@@ -34,20 +34,4 @@ public class UserController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    /**
-     * Create user.
-     * @param user the pattern user to create
-     * @return the created user
-     */
-    @PostMapping("/users")
-    public ResponseEntity<User> createUser(
-            final @RequestBody UserRequest user) {
-        try {
-            User createdUser = userService.createUser(user);
-            return ResponseEntity.ok(createdUser);
-        } catch (InvalidMailException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
-    }
 }

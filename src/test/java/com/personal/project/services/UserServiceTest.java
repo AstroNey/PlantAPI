@@ -44,45 +44,4 @@ class UserServiceTest {
         Optional<User> foundUser = userService.findUserById(1L);
         assertTrue(foundUser.isEmpty());
     }
-
-    @Test
-    void createUserShouldReturnUserWhenValidInput() {
-        UserRequest request = new UserRequest("John", "Doe", "john.doe@example.com", "password123");
-        User expectedUser = new User("John", "Doe", "john.doe@example.com", "encodedPass123");
-
-        when(userRepository.save(any(User.class))).thenReturn(expectedUser);
-
-        User createdUser = userService.createUser(request);
-
-        assertNotNull(createdUser);
-        assertEquals(request.getName(), createdUser.getName());
-        assertEquals(request.getLastname(), createdUser.getLastName());
-        assertEquals(request.getEmail(), createdUser.getEmail());
-        assertTrue(
-                Password.check(request.getPassword(), createdUser.getPassword()).withArgon2()
-        );
-
-    }
-
-    @Test
-    void createUserShouldThrowInvalidMailExceptionWhenInvalidEmail() {
-        UserRequest request = new UserRequest("John", "Doe", "invalid-email", "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request));
-
-        UserRequest request2 = new UserRequest("John", "Doe", null,
-                "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request2));
-
-        UserRequest request3 = new UserRequest("John", "Doe", "",
-                "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request3));
-
-        UserRequest request4 = new UserRequest("John", "Doe", "",
-                "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request4));
-
-        UserRequest request5 = new UserRequest("John", "Doe", "   ",
-                "password123");
-        assertThrows(InvalidMailException.class, () -> userService.createUser(request5));
-    }
 }

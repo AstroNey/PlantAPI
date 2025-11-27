@@ -2,6 +2,7 @@ package com.personal.project.controller;
 
 
 import com.personal.project.model.Plant;
+import com.personal.project.model.request.PlantFilterRequest;
 import com.personal.project.services.PlantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,22 +57,14 @@ public class PlantController {
 
     /**
      * Get all plants by filter.
-     * @param name the name
-     * @param idRegion the id region
+     * @param filter the filter
      * @return all plants by filter
      */
     @GetMapping("/filter")
     public ResponseEntity<List<Plant>> getAllPlantsByFilter(
-            @RequestParam(
-                    value = "name",
-                    required = false,
-                    defaultValue = "") final String name,
-            @RequestParam(
-                    value = "idRegion",
-                    required = false,
-                    defaultValue = "0") final long idRegion
+            @RequestParam(required = false) final PlantFilterRequest filter
     ) {
-        List<Plant> plants = plantService.findAllPlantsByFilter(name, idRegion);
+        List<Plant> plants = plantService.findAllPlantsByFilter(filter);
         return plants.isEmpty()
                 ? ResponseEntity.notFound().build()
                 : ResponseEntity.ok(plants);

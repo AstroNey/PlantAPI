@@ -5,6 +5,8 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.function.Function;
+
 /**
  * Specification for Plant entity to support dynamic queries.
  */

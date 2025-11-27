@@ -1,13 +1,9 @@
 package com.personal.project.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor
-@Getter
-public class UserRequest {
-    private String username;
-    private String lastname;
-    private String password;
-    private String email;
+public record UserRequest(
+        String firstname,
+        String username,
+        String lastname,
+        String password,
+        String email) {
 }

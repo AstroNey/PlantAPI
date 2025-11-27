@@ -13,6 +13,5 @@ import java.util.List;
 public interface PlantRepository extends JpaRepository<Plant, Long>,
                                         JpaSpecificationExecutor<Plant> {
 
-
-    List<Plant> findAll(Specification<Plant> specification);
+    List<Plant> findAll(Specification<Plant>  specification);
 }
