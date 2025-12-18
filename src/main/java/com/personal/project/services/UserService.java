@@ -1,6 +1,6 @@
 package com.personal.project.services;
 
-import com.personal.project.model.User;
+import com.personal.project.entities.User;
 import com.personal.project.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
