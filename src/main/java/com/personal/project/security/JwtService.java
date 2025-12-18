@@ -1,5 +1,6 @@
 package com.personal.project.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -9,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import io.jsonwebtoken.Claims;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

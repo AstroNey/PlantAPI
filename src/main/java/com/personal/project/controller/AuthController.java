@@ -154,7 +154,6 @@ public class AuthController {
 
         Map<String, Object> user = new HashMap<>();
         user.put("username", authentication.getName());
-        user.put("authorities", authentication.getAuthorities());
 
         return ResponseEntity.ok(user);
     }

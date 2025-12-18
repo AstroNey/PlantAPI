@@ -3,9 +3,7 @@ package com.personal.project.controller;
 import com.personal.project.entities.Specie;
 import com.personal.project.services.SpecieService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -13,27 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class SpecieController {
 
     private final SpecieService specieService;
 
     public SpecieController(final SpecieService refSpecieService) {
         this.specieService = refSpecieService;
-    }
-
-    /**
-     * Get one specie by id.
-     * @param id the id
-     * @return one specie by id
-     */
-    @GetMapping("/species/{id}")
-    public ResponseEntity<Specie> getSpecieById(
-            @PathVariable("id") final Long id
-    ) {
-        return specieService.findSpecieById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
     }
 
     /**

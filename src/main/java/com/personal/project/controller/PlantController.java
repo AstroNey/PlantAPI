@@ -5,12 +5,7 @@ import com.personal.project.dtos.filters.PlantFilter;
 import com.personal.project.entities.Plant;
 import com.personal.project.services.PlantService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +15,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/plants")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PlantController {
 
     private final PlantService plantService;
