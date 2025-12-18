@@ -1,7 +1,7 @@
 package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.UserController;
-import com.personal.project.model.User;
+import com.personal.project.entities.User;
 import com.personal.project.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class UserControllerWebLayerTest {
 
     @Test
     void testGetUserByIdSuccess() throws Exception {
-        User user = new User(1L, "Name", "lastName", "Email", "Password");
+        User user = new User(1L, "Name", "Email", "Password");
 
         when(userService.findUserById(1L))
                 .thenReturn(Optional.of(user));
@@ -37,7 +37,6 @@ class UserControllerWebLayerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Name"))
-                .andExpect(jsonPath("$.lastName").value("lastName"))
                 .andExpect(jsonPath("$.email").value("Email"))
                 .andExpect(jsonPath("$.password").value("Password"));
     }

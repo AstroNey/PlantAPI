@@ -1,9 +1,6 @@
 package com.personal.project.services;
 
-import com.password4j.Password;
-import com.personal.project.exception.InvalidMailException;
-import com.personal.project.model.User;
-import com.personal.project.model.request.UserRequest;
+import com.personal.project.entities.User;
 import com.personal.project.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +26,7 @@ class UserServiceTest {
 
     @Test
     void testGetUserById() {
-        User user = new User(1L, "name", "lastName", "email", "password");
+        User user = new User(1L, "name", "email", "password");
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         Optional<User> foundUser = userService.findUserById(1L);

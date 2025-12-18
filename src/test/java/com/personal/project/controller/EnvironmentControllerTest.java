@@ -1,6 +1,6 @@
 package com.personal.project.controller;
 
-import com.personal.project.model.Environment;
+import com.personal.project.entities.Environment;
 import com.personal.project.services.EnvironmentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

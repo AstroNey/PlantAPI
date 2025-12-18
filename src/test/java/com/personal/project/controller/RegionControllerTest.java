@@ -1,6 +1,6 @@
 package com.personal.project.controller;
 
-import com.personal.project.model.Region;
+import com.personal.project.entities.Region;
 import com.personal.project.services.RegionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

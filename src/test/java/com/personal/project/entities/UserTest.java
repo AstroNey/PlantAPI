@@ -1,4 +1,4 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -23,14 +23,13 @@ class UserTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
-        user = new User(1L, "username", "lastName", "email", "password");
+        user = new User(1L, "username", "email", "password");
     }
 
     @Test
     void testValidUser() {
         assertEquals(1L, user.getId());
-        assertEquals("username", user.getName());
-        assertEquals("lastName", user.getLastName());
+        assertEquals("username", user.getUsername());
         assertEquals("email", user.getEmail());
         assertEquals("password", user.getPassword());
 
@@ -40,24 +39,19 @@ class UserTest {
 
     @Test
     void testInvalidUser() {
-        user = new User(1L, null, "lastName", "email", "password");
+        user = new User(1L, null, "email", "password");
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
-        user = new User(1L, "", "lastName", "email", "password");
-        assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
-
-        user = new User(1L, "username", null, "email", "password");
-        assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
-        user = new User(1L, "username", "", "email", "password");
+        user = new User(1L, "", "email", "password");
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
 
-        user = new User(1L, "username", "lastName", null, "password");
+        user = new User(1L, "username", null, "password");
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
-        user = new User(1L, "username", "lastName", "", "password");
+        user = new User(1L, "username", "", "password");
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
 
-        user = new User(1L, "username", "lastName", "email", null);
+        user = new User(1L, "username", "email", null);
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
-        user = new User(1L, "username", "lastName", "email", "");
+        user = new User(1L, "username", "email", "");
         assertFalse(validator.validate(user).isEmpty(), "Expected constraint violation");
     }
 }

@@ -1,6 +1,6 @@
 package com.personal.project.services;
 
-import com.personal.project.model.Environment;
+import com.personal.project.entities.Environment;
 import com.personal.project.repository.EnvironmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

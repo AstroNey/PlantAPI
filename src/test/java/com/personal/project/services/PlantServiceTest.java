@@ -1,6 +1,7 @@
 package com.personal.project.services;
 
-import com.personal.project.model.Plant;
+import com.personal.project.entities.Plant;
+import com.personal.project.entities.builders.PlantBuilder;
 import com.personal.project.repository.PlantRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,7 @@ class PlantServiceTest {
 
     @Test
     void findPlantByIdSucces() {
-        Plant expectedPlant = new Plant.Builder()
+        Plant expectedPlant = new PlantBuilder()
                 .setId(1L)
                 .setScientificName("ScientificName")
                 .setName("Name")

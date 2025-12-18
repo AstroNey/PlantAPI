@@ -1,12 +1,15 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
-import com.personal.project.model.builders.PlantBuilder;
+import com.personal.project.entities.builders.PlantBuilder;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 import static jakarta.validation.Validation.buildDefaultValidatorFactory;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +27,7 @@ class FavoriteTest {
             validator = factory.getValidator();
         }
 
-        User user = new User(1L, "username", "password", "email", "ROLE_USER");
+        User user = new User(1L, "username",  "email", "password");
         Plant plant = new PlantBuilder()
                 .setId(1L)
                 .setScientificName("Ficus lyrata")
@@ -40,7 +43,8 @@ class FavoriteTest {
                 .setToxicity("Toxic to pets if ingested")
                 .setImage("ficus_lyrata.jpg")
                 .build();
-        favorite = new Favorite(user, plant);
+        FavoriteId favoriteId = new FavoriteId();
+        favorite = new Favorite(favoriteId, plant,  user, LocalDate.now());
         plant.addFavorite(favorite);
     }
 

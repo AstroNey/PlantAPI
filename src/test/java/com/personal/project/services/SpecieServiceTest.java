@@ -1,6 +1,6 @@
 package com.personal.project.services;
 
-import com.personal.project.model.Specie;
+import com.personal.project.entities.Specie;
 import com.personal.project.repository.SpecieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

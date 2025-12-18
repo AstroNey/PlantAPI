@@ -1,7 +1,7 @@
 package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.SpecieController;
-import com.personal.project.model.Specie;
+import com.personal.project.entities.Specie;
 import com.personal.project.services.SpecieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

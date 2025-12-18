@@ -1,4 +1,4 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

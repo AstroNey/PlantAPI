@@ -1,6 +1,6 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
-import com.personal.project.model.builders.PlantBuilder;
+import com.personal.project.entities.builders.PlantBuilder;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
@@ -39,7 +39,7 @@ class PlantTest {
         Set<Region> regions = new HashSet<>();
         regions.add(region);
 
-        User user = new User(1L, "username", "password", "email", "ROLE_USER");
+        User user = new User(1L, "username", "email", "password");
 
         // Création de la plante (sans les favoris pour l'instant)
         plant = new PlantBuilder()

@@ -1,7 +1,7 @@
 package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.EnvironmentController;
-import com.personal.project.model.Environment;
+import com.personal.project.entities.Environment;
 import com.personal.project.services.EnvironmentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

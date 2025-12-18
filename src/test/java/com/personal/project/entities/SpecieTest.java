@@ -1,4 +1,4 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

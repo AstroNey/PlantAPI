@@ -1,7 +1,7 @@
 package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.RegionController;
-import com.personal.project.model.Region;
+import com.personal.project.entities.Region;
 import com.personal.project.services.RegionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

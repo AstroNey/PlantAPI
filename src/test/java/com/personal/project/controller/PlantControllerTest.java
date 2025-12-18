@@ -1,9 +1,10 @@
 package com.personal.project.controller;
 
-import com.personal.project.model.Environment;
-import com.personal.project.model.Plant;
-import com.personal.project.model.Region;
-import com.personal.project.model.Specie;
+import com.personal.project.entities.Environment;
+import com.personal.project.entities.Plant;
+import com.personal.project.entities.Region;
+import com.personal.project.entities.Specie;
+import com.personal.project.entities.builders.PlantBuilder;
 import com.personal.project.services.PlantService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +42,7 @@ class PlantControllerTest {
         HashSet<Region> regions = new HashSet<>();
         regions.add(region);
 
-        plant = new Plant.Builder()
+        plant = new PlantBuilder()
                 .setId(1L)
                 .setScientificName("ScientificName")
                 .setName("Name")
@@ -65,7 +61,7 @@ class PlantControllerTest {
                 .setRegions(regions)
                 .build();
 
-        plant2 = new Plant.Builder()
+        plant2 = new PlantBuilder()
                 .setName("Name2")
                 .setFoliage("Foliage2")
                 .setFlowers("Flowers2")

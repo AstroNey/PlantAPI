@@ -1,6 +1,6 @@
 package com.personal.project.controller;
 
-import com.personal.project.model.User;
+import com.personal.project.entities.User;
 import com.personal.project.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +27,7 @@ class UserControllerTest {
 
     @Test
     void getUserByIdSuccess() {
-        User user = new User(1L, "Name", "lastName", "Email", "Password");
+        User user = new User(1L, "Name", "Email", "Password");
         when(userService.findUserById(1L)).thenReturn(Optional.of(user));
 
         ResponseEntity<User> response = userController.findUserById(1L);
