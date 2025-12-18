@@ -1,6 +1,6 @@
 package com.personal.project.controller;
 
-import com.personal.project.model.Specie;
+import com.personal.project.entities.Specie;
 import com.personal.project.services.SpecieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

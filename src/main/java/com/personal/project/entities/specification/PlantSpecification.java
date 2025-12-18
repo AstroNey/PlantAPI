@@ -1,11 +1,9 @@
-package com.personal.project.model.specification;
+package com.personal.project.entities.specification;
 
-import com.personal.project.model.Plant;
+import com.personal.project.entities.Plant;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
-
-import java.util.function.Function;
 
 /**
  * Specification for Plant entity to support dynamic queries.

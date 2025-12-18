@@ -1,6 +1,6 @@
-package com.personal.project.model.builders;
+package com.personal.project.entities.builders;
 
-import com.personal.project.model.*;
+import com.personal.project.entities.*;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;

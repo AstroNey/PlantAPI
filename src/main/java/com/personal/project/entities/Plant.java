@@ -1,7 +1,7 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.personal.project.model.builders.PlantBuilder;
+import com.personal.project.entities.builders.PlantBuilder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

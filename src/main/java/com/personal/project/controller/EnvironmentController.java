@@ -1,7 +1,7 @@
 package com.personal.project.controller;
 
 
-import com.personal.project.model.Environment;
+import com.personal.project.entities.Environment;
 import com.personal.project.services.EnvironmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

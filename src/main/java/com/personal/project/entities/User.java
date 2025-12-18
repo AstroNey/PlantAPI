@@ -1,6 +1,5 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
-import com.personal.project.tools.Tools;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,16 +10,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity(name = "users")
 public class User {
 
@@ -31,12 +26,7 @@ public class User {
 
     @NotNull
     @NotEmpty
-    private String name;
-
-    @NotNull
-    @NotEmpty
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    private String username;
 
     @NotNull
     @NotEmpty
@@ -49,16 +39,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private final Set<Favorite> favorites = new LinkedHashSet<>();
-
-    public User(
-            final String newName,
-            final String newLastName,
-            final String newEmail,
-            final String newPassword
-    ) {
-        this.name = newName;
-        this.lastName = newLastName;
-        this.email = newEmail;
-        this.password = Tools.encryptPwd(newPassword);
-    }
 }

@@ -1,4 +1,4 @@
-package com.personal.project.model;
+package com.personal.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

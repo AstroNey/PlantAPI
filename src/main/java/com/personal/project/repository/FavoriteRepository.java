@@ -1,6 +1,6 @@
 package com.personal.project.repository;
 
-import com.personal.project.model.Favorite;
+import com.personal.project.entities.Favorite;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,8 +1,8 @@
 package com.personal.project.controller;
 
 
-import com.personal.project.model.Plant;
-import com.personal.project.model.request.PlantFilterRequest;
+import com.personal.project.dtos.filters.PlantFilter;
+import com.personal.project.entities.Plant;
 import com.personal.project.services.PlantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +62,7 @@ public class PlantController {
      */
     @GetMapping("/filter")
     public ResponseEntity<List<Plant>> getAllPlantsByFilter(
-            @RequestParam(required = false) final PlantFilterRequest filter
+            @RequestParam(required = false) final PlantFilter filter
     ) {
         List<Plant> plants = plantService.findAllPlantsByFilter(filter);
         return plants.isEmpty()

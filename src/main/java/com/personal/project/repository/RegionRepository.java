@@ -1,6 +1,6 @@
 package com.personal.project.repository;
 
-import com.personal.project.model.Region;
+import com.personal.project.entities.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.personal.project.controller;
 
 
-import com.personal.project.model.Region;
+import com.personal.project.entities.Region;
 import com.personal.project.services.RegionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

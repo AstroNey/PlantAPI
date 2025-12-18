@@ -1,6 +1,6 @@
 package com.personal.project.repository;
 
-import com.personal.project.model.Plant;
+import com.personal.project.entities.Plant;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

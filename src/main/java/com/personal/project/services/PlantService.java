@@ -1,8 +1,8 @@
 package com.personal.project.services;
 
-import com.personal.project.model.Plant;
-import com.personal.project.model.request.PlantFilterRequest;
-import com.personal.project.model.specification.PlantSpecification;
+import com.personal.project.dtos.filters.PlantFilter;
+import com.personal.project.entities.Plant;
+import com.personal.project.entities.specification.PlantSpecification;
 import com.personal.project.repository.PlantRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -31,10 +31,10 @@ public class PlantService {
         return plantRepository.findAll();
     }
 
-    public List<Plant> findAllPlantsByFilter(final PlantFilterRequest filter) {
+    public List<Plant> findAllPlantsByFilter(final PlantFilter filter) {
         List<Specification<Plant>> specs = Stream.of(
-                        match(filter.name(),     PlantSpecification::nameStartWith),
-                        match(filter.idRegion(), PlantSpecification::hasRegion)
+                        match(filter.getName(), PlantSpecification::nameStartWith),
+                        match(filter.getIdRegion(), PlantSpecification::hasRegion)
                 )
                 .filter(Objects::nonNull)
                 .toList();

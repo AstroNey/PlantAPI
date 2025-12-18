@@ -1,6 +1,6 @@
 package com.personal.project.repository;
 
-import com.personal.project.model.Specie;
+import com.personal.project.entities.Specie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

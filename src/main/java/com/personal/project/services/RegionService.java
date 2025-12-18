@@ -1,6 +1,6 @@
 package com.personal.project.services;
 
-import com.personal.project.model.Region;
+import com.personal.project.entities.Region;
 import com.personal.project.repository.RegionRepository;
 import org.springframework.stereotype.Service;
 
