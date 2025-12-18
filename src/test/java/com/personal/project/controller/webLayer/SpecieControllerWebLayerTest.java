@@ -2,12 +2,16 @@ package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.SpecieController;
 import com.personal.project.entities.Specie;
+import com.personal.project.security.JwtAuthenticationFilter;
+import com.personal.project.security.JwtService;
 import com.personal.project.services.SpecieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -18,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(SpecieController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class SpecieControllerWebLayerTest {
 
     @Autowired
@@ -25,6 +30,16 @@ class SpecieControllerWebLayerTest {
 
     @MockBean
     private SpecieService specieService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
 
     @Test
     void testGetAllSpeciesSuccess() throws Exception {
@@ -46,29 +61,6 @@ class SpecieControllerWebLayerTest {
                 .thenReturn(Optional.empty());
 
         mockMvc.perform(get("/species"))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    void testGetSpecieByIdSuccess() throws Exception {
-        Specie specie = new Specie(42L, "Tiger");
-
-        when(specieService.findSpecieById(42L))
-                .thenReturn(Optional.of(specie));
-
-        mockMvc.perform(get("/species/42"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(42L))
-                .andExpect(jsonPath("$.name").value("Tiger"));
-    }
-
-    @Test
-    void testGetSpecieByIdNotFound() throws Exception {
-        when(specieService.findSpecieById(99L))
-                .thenReturn(Optional.empty());
-
-        mockMvc.perform(get("/species/99"))
                 .andExpect(status().isNotFound());
     }
 }

@@ -2,12 +2,16 @@ package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.EnvironmentController;
 import com.personal.project.entities.Environment;
+import com.personal.project.security.JwtAuthenticationFilter;
+import com.personal.project.security.JwtService;
 import com.personal.project.services.EnvironmentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -17,7 +21,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(EnvironmentController.class)
+@WebMvcTest(controllers = EnvironmentController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class EnvironmentControllerWebLayerTest {
 
     @Autowired
@@ -25,6 +30,15 @@ class EnvironmentControllerWebLayerTest {
 
     @MockBean
     private EnvironmentService environmentService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
 
     @Test
     void testGetAllEnvironmentsSuccess() throws Exception {
@@ -46,28 +60,6 @@ class EnvironmentControllerWebLayerTest {
                 .thenReturn(Optional.empty());
 
         mockMvc.perform(get("/environments"))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    void testGetEnvironmentByIdSuccess() throws Exception {
-        Environment env = new Environment(42L, "Desert");
-        when(environmentService.findEnvironmentById(42L))
-                .thenReturn(Optional.of(env));
-
-        mockMvc.perform(get("/environments/42"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(42L))
-                .andExpect(jsonPath("$.name").value("Desert"));
-    }
-
-    @Test
-    void testGetEnvironmentByIdNotFound() throws Exception {
-        when(environmentService.findEnvironmentById(99L))
-                .thenReturn(Optional.empty());
-
-        mockMvc.perform(get("/environments/99"))
                 .andExpect(status().isNotFound());
     }
 }

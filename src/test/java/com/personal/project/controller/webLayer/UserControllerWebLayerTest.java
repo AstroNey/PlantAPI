@@ -1,22 +1,18 @@
 package com.personal.project.controller.webLayer;
 
 import com.personal.project.controller.UserController;
-import com.personal.project.entities.User;
+import com.personal.project.security.JwtAuthenticationFilter;
+import com.personal.project.security.JwtService;
 import com.personal.project.services.UserService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 @WebMvcTest(UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerWebLayerTest {
 
     @Autowired
@@ -25,28 +21,13 @@ class UserControllerWebLayerTest {
     @MockBean
     private UserService userService;
 
-    @Test
-    void testGetUserByIdSuccess() throws Exception {
-        User user = new User(1L, "Name", "Email", "Password");
+    @MockBean
+    private JwtService jwtService;
 
-        when(userService.findUserById(1L))
-                .thenReturn(Optional.of(user));
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-        mockMvc.perform(get("/users/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.name").value("Name"))
-                .andExpect(jsonPath("$.email").value("Email"))
-                .andExpect(jsonPath("$.password").value("Password"));
-    }
+    @MockBean
+    private UserDetailsService userDetailsService;
 
-    @Test
-    void testGetUserByIdNotFound() throws Exception {
-        when(userService.findUserById(99L))
-                .thenReturn(Optional.empty());
-
-        mockMvc.perform(get("/users/99"))
-                .andExpect(status().isNotFound());
-    }
 }

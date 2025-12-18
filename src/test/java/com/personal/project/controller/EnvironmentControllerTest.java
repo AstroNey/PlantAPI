@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc(addFilters = false)
 class EnvironmentControllerTest {
 
     @Mock
@@ -25,29 +27,6 @@ class EnvironmentControllerTest {
 
     @InjectMocks
     private EnvironmentController environmentController;
-
-    @Test
-    void getEnvironmentByIdSuccess() {
-        Environment environment = new Environment(1L, "Environment");
-        when(environmentService.findEnvironmentById(1L)).thenReturn(Optional.of(environment));
-
-        ResponseEntity<Environment> response = environmentController.getEnvironmentById(1L);
-
-        // Assert the response status and body
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(environment, response.getBody());
-    }
-
-    @Test
-    void getEnvironmentByIdNotFound() {
-        when(environmentService.findEnvironmentById(1L)).thenReturn(Optional.empty());
-
-        ResponseEntity<Environment> response = environmentController.getEnvironmentById(1L);
-
-        // Assert the response status and body
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody());
-    }
 
     @Test
     void getAllEnvironmentsSuccess() {

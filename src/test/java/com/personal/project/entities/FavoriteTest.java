@@ -9,10 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static jakarta.validation.Validation.buildDefaultValidatorFactory;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 class FavoriteTest {
@@ -43,8 +43,11 @@ class FavoriteTest {
                 .setToxicity("Toxic to pets if ingested")
                 .setImage("ficus_lyrata.jpg")
                 .build();
-        FavoriteId favoriteId = new FavoriteId();
-        favorite = new Favorite(favoriteId, plant,  user, LocalDate.now());
+
+        // Fix: Use the AllArgsConstructor to create FavoriteId with both IDs
+        FavoriteId favoriteId = new FavoriteId(1L, 1L); // idUser, idPlant
+
+        favorite = new Favorite(favoriteId, plant, user, LocalDate.now());
         plant.addFavorite(favorite);
     }
 

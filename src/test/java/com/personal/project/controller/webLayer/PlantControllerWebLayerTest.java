@@ -6,13 +6,17 @@ import com.personal.project.entities.Plant;
 import com.personal.project.entities.Region;
 import com.personal.project.entities.Specie;
 import com.personal.project.entities.builders.PlantBuilder;
+import com.personal.project.security.JwtAuthenticationFilter;
+import com.personal.project.security.JwtService;
 import com.personal.project.services.PlantService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashSet;
@@ -24,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(PlantController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class PlantControllerWebLayerTest {
 
     @Autowired
@@ -31,6 +36,15 @@ class PlantControllerWebLayerTest {
 
     @MockBean
     private PlantService plantService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
 
     private Plant testPlant;
 
