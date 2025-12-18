@@ -55,7 +55,7 @@ public final class PlantSpecification {
     public static Specification<Plant> hasEnvironment(final Long environmentId) {
         return (root, query, cb) -> {
             if (environmentId == null || environmentId == 0) {
-                return null; // aucun filtre appliqué
+                return null;
             }
 
             Join<Object, Object> environmentJoin
@@ -83,16 +83,6 @@ public final class PlantSpecification {
         };
     }
 
-    /**
-     * Specification to filter plants by toxicity.
-     * @param toxicity the toxicity level
-     * @return a Specification for filtering plants by toxicity
-     */
-    public static Specification<Plant> hasToxicity(final String toxicity) {
-        return (root, query, cb) ->
-                toxicity == null ? null : cb.equal(root.get("toxicity"), toxicity);
-    }
-
-    // TODO sunlight, watering, soil, temperature
+    // TODO sunlight, watering, soil, temperature, Toxicity
     // TODO favorites plus tard
 }

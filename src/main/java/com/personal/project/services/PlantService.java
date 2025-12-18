@@ -34,7 +34,9 @@ public class PlantService {
     public List<Plant> findAllPlantsByFilter(final PlantFilter filter) {
         List<Specification<Plant>> specs = Stream.of(
                         match(filter.getName(), PlantSpecification::nameStartWith),
-                        match(filter.getIdRegion(), PlantSpecification::hasRegion)
+                        match(filter.getIdRegion(), PlantSpecification::hasRegion),
+                        match(filter.getIdSpecie(), PlantSpecification::hasSpecie),
+                        match(filter.getIdEnvironment(), PlantSpecification::hasEnvironment)
                 )
                 .filter(Objects::nonNull)
                 .toList();

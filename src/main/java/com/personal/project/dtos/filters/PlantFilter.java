@@ -6,4 +6,6 @@ import lombok.Data;
 public class PlantFilter {
     String name;
     Long idRegion;
+    Long idEnvironment;
+    Long idSpecie;
 }
