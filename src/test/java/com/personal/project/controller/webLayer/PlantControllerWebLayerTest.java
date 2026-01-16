@@ -6,6 +6,8 @@ import com.personal.project.entities.Plant;
 import com.personal.project.entities.Region;
 import com.personal.project.entities.Specie;
 import com.personal.project.entities.builders.PlantBuilder;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import com.personal.project.security.JwtAuthenticationFilter;
 import com.personal.project.security.JwtService;
 import com.personal.project.services.PlantService;
@@ -63,8 +65,8 @@ class PlantControllerWebLayerTest {
                 .setFoliage("Foliage")
                 .setFlowers("Flowers")
                 .setSize(0.6)
-                .setSunlight("Sunlight")
-                .setWatering("Watering")
+                .setSunlight(LightLevel.MEDIUM)
+                .setWatering(Watering.AQUATIC)
                 .setSoil("Soil")
                 .setTemperature("Temp")
                 .setCare("Care")

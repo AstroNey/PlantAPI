@@ -1,6 +1,8 @@
 package com.personal.project.entities.specification;
 
 import com.personal.project.entities.Plant;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
@@ -28,61 +30,44 @@ public final class PlantSpecification {
     }
 
     /**
-     * Specification to filter plants associated with a specific region.
-     * @param regionId the ID of the region
-     * @return a Specification for filtering plants by region ID
+     * Specification to filter plants by specific light level.
+     * @param lightLevel the light level to filter by
+     * @return a Specification for filtering plants by light level
      */
-    public static Specification<Plant> hasRegion(final Long regionId) {
+    public static Specification<Plant> hasLightLevel(final LightLevel lightLevel) {
         return (root, query, cb) -> {
-            if (regionId == null || regionId == 0) {
-                return null; // aucun filtre appliqué
-            }
-
-            // On fait un JOIN sur la relation ManyToMany
-            Join<Object, Object> regionJoin
-                    = root.join("regions", JoinType.INNER);
-
-            // On compare l'ID de la région jointe
-            return cb.equal(regionJoin.get("id"), regionId);
-        };
-    }
-
-    /**
-     * Specification to filter plants associated with a specific environment.
-     * @param environmentId the ID of the environment
-     * @return a Specification for filtering plants by environment ID
-     */
-    public static Specification<Plant> hasEnvironment(final Long environmentId) {
-        return (root, query, cb) -> {
-            if (environmentId == null || environmentId == 0) {
+            if (lightLevel == null) {
                 return null;
             }
-
-            Join<Object, Object> environmentJoin
-                    = root.join("environment", JoinType.INNER);
-
-            return cb.equal(environmentJoin.get("id"), environmentId);
+            return cb.equal(root.get("sunlight"), lightLevel);
         };
     }
 
     /**
-     * Specification to filter plants associated with a specific specie.
-     * @param specieId the ID of the specie
-     * @return a Specification for filtering plants by specie ID
+     * Specification to filter plants by specific watering level.
+     * @param watering the watering level to filter by
+     * @return a Specification for filtering plants by watering level
      */
-    public static Specification<Plant> hasSpecie(final Long specieId) {
+    public static Specification<Plant> hasWatering(final Watering watering) {
         return (root, query, cb) -> {
-            if (specieId == null || specieId == 0) {
-                return null; // aucun filtre appliqué
+            if (watering == null) {
+                return null;
             }
-
-            Join<Object, Object> specieJoin
-                    = root.join("specie", JoinType.INNER);
-
-            return cb.equal(specieJoin.get("id"), specieId);
+            return cb.equal(root.get("watering"), watering);
         };
     }
 
-    // TODO sunlight, watering, soil, temperature, Toxicity
-    // TODO favorites plus tard
+    /**
+     * Specification to filter plants that have flowers.
+     * @param hasFlowers true if plant must have flowers, false if must not have flowers
+     * @return a Specification for filtering plants by flowers presence
+     */
+    public static Specification<Plant> hasFlowers(final Boolean hasFlowers) {
+        return (root, query, cb) -> {
+            if (hasFlowers == null) {
+                return null;
+            }
+            return cb.equal(root.get("hasFlowers"), hasFlowers);
+        };
+    }
 }

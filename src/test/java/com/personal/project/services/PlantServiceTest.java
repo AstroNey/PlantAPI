@@ -2,6 +2,8 @@ package com.personal.project.services;
 
 import com.personal.project.entities.Plant;
 import com.personal.project.entities.builders.PlantBuilder;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import com.personal.project.repository.PlantRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +35,8 @@ class PlantServiceTest {
                 .setFoliage("Foliage")
                 .setFlowers("Flowers")
                 .setSize(0.6)
-                .setSunlight("Sunlight")
-                .setWatering("Watering")
+                .setSunlight(LightLevel.MEDIUM)
+                .setWatering(Watering.AQUATIC)
                 .setSoil("Soil")
                 .setTemperature("Temp")
                 .setCare("Care")

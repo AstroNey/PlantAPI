@@ -1,6 +1,8 @@
 package com.personal.project.entities.builders;
 
 import com.personal.project.entities.*;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -18,8 +20,8 @@ public class PlantBuilder {
     public String foliage;
     public String flowers;
     public double size;
-    public String sunlight;
-    public String watering;
+    public LightLevel sunlight;
+    public Watering watering;
     public String soil;
     public String temperature;
     public String care;

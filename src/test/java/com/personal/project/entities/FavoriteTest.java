@@ -1,6 +1,8 @@
 package com.personal.project.entities;
 
 import com.personal.project.entities.builders.PlantBuilder;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,8 +37,8 @@ class FavoriteTest {
                 .setFoliage("Large, violin-shaped leaves")
                 .setFlowers("Small, insignificant flowers")
                 .setSize(150.0)
-                .setSunlight("Bright, indirect light")
-                .setWatering("Water when top inch of soil is dry")
+                .setSunlight(LightLevel.MEDIUM)
+                .setWatering(Watering.AQUATIC)
                 .setSoil("Well-draining potting mix")
                 .setTemperature("65-75°F (18-24°C)")
                 .setCare("Wipe leaves to remove dust, rotate regularly")

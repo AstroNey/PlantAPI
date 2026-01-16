@@ -2,6 +2,8 @@ package com.personal.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.personal.project.entities.builders.PlantBuilder;
+import com.personal.project.enums.LightLevel;
+import com.personal.project.enums.Watering;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -44,11 +46,13 @@ public class Plant {
 
     @NotNull
     @NotEmpty
-    private String sunlight;
+    @Enumerated(EnumType.STRING)
+    private LightLevel sunlight;
 
     @NotNull
     @NotEmpty
-    private String watering;
+    @Enumerated(EnumType.STRING)
+    private Watering watering;
 
     @NotNull
     @NotEmpty

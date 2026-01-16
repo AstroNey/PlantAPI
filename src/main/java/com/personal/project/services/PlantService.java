@@ -31,12 +31,17 @@ public class PlantService {
         return plantRepository.findAll();
     }
 
+    /**
+     * Find all plants matching the given filter criteria.
+     * @param filter the filter containing search criteria
+     * @return list of plants matching the filter
+     */
     public List<Plant> findAllPlantsByFilter(final PlantFilter filter) {
         List<Specification<Plant>> specs = Stream.of(
                         match(filter.getName(), PlantSpecification::nameStartWith),
-                        match(filter.getIdRegion(), PlantSpecification::hasRegion),
-                        match(filter.getIdSpecie(), PlantSpecification::hasSpecie),
-                        match(filter.getIdEnvironment(), PlantSpecification::hasEnvironment)
+                        match(filter.getHasSunlight(), PlantSpecification::hasLightLevel),
+                        match(filter.getHasWatering(), PlantSpecification::hasWatering),
+                        match(filter.getHasFlower(), PlantSpecification::hasFlowers)
                 )
                 .filter(Objects::nonNull)
                 .toList();
@@ -45,7 +50,8 @@ public class PlantService {
             return plantRepository.findAll();
         }
 
-        Specification<Plant> finalSpec = specs.stream().reduce(Specification.where(null), Specification::and);
+        Specification<Plant> finalSpec = specs.stream()
+                .reduce(Specification.where(null), Specification::and);
         return plantRepository.findAll(finalSpec);
     }
 
