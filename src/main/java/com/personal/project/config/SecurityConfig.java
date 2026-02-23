@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // JWT gère la sécurité
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/plants/**").permitAll()
+                        .requestMatchers("/favorites/**").authenticated()
                         .requestMatchers("/regions/**",
                                 "/environments/**", "/species/**").authenticated()
                         .anyRequest().authenticated()
