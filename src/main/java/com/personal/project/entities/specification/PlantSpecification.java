@@ -3,8 +3,6 @@ package com.personal.project.entities.specification;
 import com.personal.project.entities.Plant;
 import com.personal.project.enums.LightLevel;
 import com.personal.project.enums.Watering;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
 /**

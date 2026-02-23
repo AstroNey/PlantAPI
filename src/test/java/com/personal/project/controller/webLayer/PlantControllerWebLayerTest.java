@@ -22,8 +22,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -94,6 +96,45 @@ class PlantControllerWebLayerTest {
 
         mockMvc.perform(get("/plants/999"))
                 .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getAllPlants_success() throws Exception {
+        when(plantService.findAllPlants()).thenReturn(List.of(testPlant));
+
+        mockMvc.perform(get("/plants"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(1L));
+    }
+
+    @Test
+    void getAllPlants_notFound() throws Exception {
+        when(plantService.findAllPlants()).thenReturn(List.of());
+
+        mockMvc.perform(get("/plants"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getAllPlantsByFilter_success() throws Exception {
+        when(plantService.findAllPlantsByFilter(any()))
+                .thenReturn(List.of(testPlant));
+
+        mockMvc.perform(get("/plants/filter")
+                        .param("hasLightLevel", "MEDIUM"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(1L));
+    }
+
+    @Test
+    void getAllPlantsByFilter_notFound() throws Exception {
+        when(plantService.findAllPlantsByFilter(any()))
+                .thenReturn(List.of());
+
+        mockMvc.perform(get("/plants/filter"))
                 .andExpect(status().isNotFound());
     }
 }

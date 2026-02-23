@@ -78,8 +78,8 @@ class PlantTest {
         assertEquals("Foliage", plant.getFoliage());
         assertEquals("Flowers", plant.getFlowers());
         assertEquals(0.6, plant.getSize());
-        assertEquals("Sunlight", plant.getSunlight());
-        assertEquals("Watering", plant.getWatering());
+        assertEquals(LightLevel.MEDIUM, plant.getSunlight());
+        assertEquals(Watering.AQUATIC, plant.getWatering());
         assertEquals("Soil", plant.getSoil());
         assertEquals("Temp", plant.getTemperature());
         assertEquals("Care", plant.getCare());

@@ -1,5 +1,6 @@
 package com.personal.project.controller;
 
+import com.personal.project.dtos.filters.PlantFilter;
 import com.personal.project.entities.Environment;
 import com.personal.project.entities.Plant;
 import com.personal.project.entities.Region;
@@ -19,9 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -103,6 +106,47 @@ class PlantControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    @Test
+    void getAllPlants_returnsList() {
+        when(plantService.findAllPlants()).thenReturn(List.of(plant, plant2));
 
-    //TODO GET ALL PLANTS TESTS
+        ResponseEntity<List<Plant>> response = plantController.getAllPlants();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(2, response.getBody().size());
+    }
+
+    @Test
+    void getAllPlants_returnsNotFound() {
+        when(plantService.findAllPlants()).thenReturn(List.of());
+
+        ResponseEntity<List<Plant>> response = plantController.getAllPlants();
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void getAllPlantsByFilter_returnsList() {
+        when(plantService.findAllPlantsByFilter(any(PlantFilter.class)))
+                .thenReturn(List.of(plant));
+
+        ResponseEntity<List<Plant>> response = plantController.getAllPlantsByFilter(
+                LightLevel.MEDIUM, Watering.AQUATIC, true);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
+    }
+
+    @Test
+    void getAllPlantsByFilter_returnsNotFound() {
+        when(plantService.findAllPlantsByFilter(any(PlantFilter.class)))
+                .thenReturn(List.of());
+
+        ResponseEntity<List<Plant>> response = plantController.getAllPlantsByFilter(
+                null, null, null);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 }

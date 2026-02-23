@@ -45,12 +45,10 @@ public class Plant {
     private double size;
 
     @NotNull
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     private LightLevel sunlight;
 
     @NotNull
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     private Watering watering;
 
