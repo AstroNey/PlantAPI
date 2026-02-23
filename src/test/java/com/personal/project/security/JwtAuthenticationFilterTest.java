@@ -117,6 +117,42 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
+    void doFilterInternal_usernameNull_continuesWithoutAuth() throws Exception {
+        String token = "some.jwt.token";
+        request.setCookies(new Cookie("accessToken", token));
+
+        when(jwtService.extractUsername(token)).thenReturn(null);
+
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        verify(filterChain).doFilter(request, response);
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test
+    void doFilterInternal_authenticationAlreadySet_doesNotOverride() throws Exception {
+        String token = "valid.jwt.token";
+        request.setCookies(new Cookie("accessToken", token));
+
+        // Pre-set authentication in SecurityContext
+        UserDetails existingUser = User.withUsername("existinguser")
+                .password("password")
+                .authorities("ROLE_USER")
+                .build();
+        var existingAuth = new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
+                existingUser, null, existingUser.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(existingAuth);
+
+        when(jwtService.extractUsername(token)).thenReturn("testuser");
+
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        verify(filterChain).doFilter(request, response);
+        // Should still be the existing auth, not overridden
+        assertEquals("existinguser", SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    @Test
     void doFilterInternal_validTokenButInvalidForUser_noAuth() throws Exception {
         String token = "valid.jwt.token";
         request.setCookies(new Cookie("accessToken", token));
